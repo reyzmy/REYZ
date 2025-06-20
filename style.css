@@ -1,0 +1,61 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #FFE5B4;
+  color: #476481;
+}
+header {
+  background-color: #476481;
+  color: white;
+  padding: 1em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  height: 40px;
+}
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: block;
+}
+.menu.hidden {
+  display: none;
+}
+.menu.show {
+  display: block;
+  position: absolute;
+  top: 60px;
+  right: 1em;
+  background-color: #476481;
+  padding: 1em;
+  border-radius: 5px;
+}
+.menu a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 0.5em;
+}
+main {
+  padding: 1em;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1em;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+}
+.back {
+  color: white;
+  text-decoration: none;
+}
+.music-embed iframe {
+  margin-bottom: 2em;
+}
