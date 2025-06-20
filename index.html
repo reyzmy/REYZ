@@ -14,7 +14,7 @@
     }
 
     .navbar {
-      background-color: #476481;
+      background-color: #000000; /* warna hitam */
       color: white;
       display: flex;
       justify-content: space-between;
@@ -41,80 +41,3 @@
 
     .menu-toggle {
       font-size: 24px;
-      display: none;
-      cursor: pointer;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1em;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .hero {
-      padding: 4em 2em;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #476481;
-        position: absolute;
-        top: 60px;
-        right: 1em;
-        padding: 1em;
-        border-radius: 8px;
-        z-index: 1000;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-    }
-  </style>
-  <script>
-    function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("active");
-    }
-  </script>
-</head>
-<body>
-  <header class="navbar">
-    <div class="logo-title">
-      <img src="images/logo.png" alt="REYZ Logo" class="logo">
-      <span class="title">REYZ</span>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="nav-links" class="nav-links">
-      <a href="/">Home</a>
-      <a href="/galeri/">Galeri</a>
-      <a href="/muzik/">Muzik</a>
-    </nav>
-  </header>
-
-  <main class="hero">
-    <h1>Selamat Datang ke REYZ</h1>
-    <p>Muzik. Visual. Kreativiti. Semuanya di sini.</p>
-  </main>
-</body>
-</html>
