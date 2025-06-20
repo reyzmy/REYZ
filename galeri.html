@@ -8,25 +8,75 @@
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #FFE5B4;
       color: #476481;
     }
 
-    header {
-      background-color: #000;
+    /* Navbar sama macam utama */
+    .navbar {
+      background-color: #476481;
       color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 1em;
-      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .back {
-      position: absolute;
-      left: 1em;
-      top: 1em;
+    .logo-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      font-size: 24px;
+      display: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1em;
+    }
+
+    .nav-links a {
       color: white;
       text-decoration: none;
-      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #476481;
+        position: absolute;
+        top: 60px;
+        right: 1em;
+        padding: 1em;
+        border-radius: 8px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
     }
 
     main {
@@ -59,11 +109,24 @@
       color: #476481;
     }
   </style>
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+  </script>
 </head>
 <body>
-  <header>
-    <a href="../index.html" class="back">← Kembali</a>
-    <h1>Galeri</h1>
+  <header class="navbar">
+    <div class="logo-title">
+      <img src="../images/logo.png" alt="REYZ Logo" class="logo">
+      <span class="title">REYZ</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav-links" class="nav-links">
+      <a href="/">Utama</a>
+      <a href="/galeri/">Galeri</a>
+      <a href="/muzik/">Muzik</a>
+    </nav>
   </header>
 
   <main>
