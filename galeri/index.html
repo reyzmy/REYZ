@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeri - REYZ</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #FFE5B4;
+      color: #476481;
+      margin: 0;
+    }
+
+    header {
+      background-color: #476481;
+      padding: 1em;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-left: 1em;
+    }
+
+    .gallery-grid {
+      padding: 2em;
+      display: grid;
+      gap: 1.5em;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .gallery-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      text-align: center;
+    }
+
+    .gallery-card:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-card h3 {
+      padding: 1em;
+      margin: 0;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="back">← Kembali</a>
+    <h1>Galeri</h1>
+  </header>
+
+  <main class="gallery-grid">
+    <!-- Theme 1 -->
+    <div class="gallery-card">
+      <a data-flickr-embed="true" href="https://www.flickr.com/photos/202715644@N03/albums/72177720326702872" title="Assignment Theme 1 - Cultural">
+        <img src="https://live.staticflickr.com/65535/54574923323_7d94932779_h.jpg" alt="Assignment Theme 1 - Cultural"/>
+      </a>
+      <h3>Assignment Theme 1 - Cultural</h3>
+    </div>
+
+    <!-- Theme 2 -->
+    <div class="gallery-card">
+      <a data-flickr-embed="true" href="https://www.flickr.com/photos/202715644@N03/albums/72177720326707877" title="Assignment Theme 2 - Street">
+        <img src="https://live.staticflickr.com/65535/54575264746_3f53455650_h.jpg" alt="Assignment Theme 2 - Street"/>
+      </a>
+      <h3>Assignment Theme 2 - Street</h3>
+    </div>
+
+    <!-- Theme 3 -->
+    <div class="gallery-card">
+      <a data-flickr-embed="true" href="https://www.flickr.com/photos/202715644@N03/albums/72177720326828902" title="Assignment Theme 3 - Landscape">
+        <img src="https://live.staticflickr.com/65535/54586357223_1125df3c56_h.jpg" alt="Assignment Theme 3 - Landscape"/>
+      </a>
+      <h3>Assignment Theme 3 - Landscape</h3>
+    </div>
+
+    <!-- More Photos -->
+    <div class="gallery-card">
+      <a data-flickr-embed="true" href="https://www.flickr.com/photos/202715644@N03/albums/72177720326862853" title="More Photos">
+        <img src="https://live.staticflickr.com/65535/54587091347_43f3e1d25d_h.jpg" alt="More Photos"/>
+      </a>
+      <h3>More Photos</h3>
+    </div>
+  </main>
+
+  <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+</body>
+</html>
