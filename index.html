@@ -4,15 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REYZ</title>
-
-  <!-- Google Font: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
+      margin: 0;
       background-color: #FFE5B4;
       color: #476481;
     }
@@ -26,7 +23,7 @@
       padding: 1em;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 999;
     }
 
     .logo-title {
@@ -41,7 +38,7 @@
 
     .title {
       font-size: 1.5em;
-      font-weight: 700;
+      font-weight: bold;
     }
 
     .menu-toggle {
@@ -58,34 +55,7 @@
     .nav-links a {
       color: white;
       text-decoration: none;
-      font-weight: 600;
-    }
-
-    .hero {
-      padding: 4em 2em;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-      font-weight: 700;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-      font-weight: 400;
-    }
-
-    .spotify-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1em;
-      margin-top: 3em;
-    }
-
-    .spotify-grid iframe {
-      border-radius: 12px;
+      font-weight: bold;
     }
 
     @media (max-width: 768px) {
@@ -102,25 +72,79 @@
         right: 1em;
         padding: 1em;
         border-radius: 8px;
-        z-index: 1000;
       }
 
       .nav-links.active {
         display: flex;
       }
     }
+
+    .hero {
+      padding: 4em 2em 2em;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2em;
+      margin-bottom: 0.5em;
+      font-weight: 700;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+    }
+
+    .spotify-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1em;
+      margin-top: 3em;
+      padding: 0 2em 4em;
+    }
+
+    iframe {
+      border-radius: 12px;
+    }
   </style>
   <script>
     function toggleMenu() {
       document.getElementById("nav-links").classList.toggle("active");
     }
+
+    const greetings = [
+      "Selamat Datang ke REYZ",
+      "REYZ سلامت داتڠ ک",
+      "Welcome to REYZ",
+      "欢迎来到 REYZ",
+      "வணக்கம் REYZ இல்",
+      "Sugeng rawuh ing REYZ",
+      "REYZ에 오신 것을 환영합니다",
+      "Добро пожаловать в REYZ",
+      "ようこそ REYZ へ",
+      "Bienvenido a REYZ",
+      "مرحبا بك في REYZ"
+    ];
+
+    let index = 0;
+    window.addEventListener('DOMContentLoaded', () => {
+      const greetingEl = document.getElementById("greeting");
+      setInterval(() => {
+        greetingEl.style.opacity = 0;
+        setTimeout(() => {
+          index = (index + 1) % greetings.length;
+          greetingEl.textContent = greetings[index];
+          greetingEl.style.opacity = 1;
+        }, 500);
+      }, 3000);
+    });
   </script>
 </head>
 <body>
   <header class="navbar">
     <div class="logo-title">
       <img src="images/logo.png" alt="REYZ Logo" class="logo">
-      <span class="title">REYZ.my</span>
+      <span class="title">REYZ</span>
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav-links" class="nav-links">
@@ -131,26 +155,15 @@
   </header>
 
   <main class="hero">
-    <h1>Selamat Datang ke REYZ.my</h1>
-    <p>Muzik. Visual. Kreativiti. Semuanya ada di sini.</p>
+    <h1 id="greeting">Selamat Datang ke REYZ</h1>
+    <p>Muzik. Visual. Kreativiti. Semuanya di sini.</p>
 
-    <section class="spotify-grid">
-      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" 
-        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy"></iframe>
-
-      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" 
-        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy"></iframe>
-
-      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" 
-        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy"></iframe>
-
-      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" 
-        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-        loading="lazy"></iframe>
-    </section>
+    <div class="spotify-grid">
+      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
   </main>
 </body>
 </html>
