@@ -4,17 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REYZ</title>
+
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #FFE5B4;
       color: #476481;
     }
 
     .navbar {
-      background-color: #476481;
+      background-color: #000; /* Hitam supaya logo biru lebih jelas */
       color: white;
       display: flex;
       justify-content: space-between;
@@ -36,7 +40,7 @@
 
     .title {
       font-size: 1.5em;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .menu-toggle {
@@ -53,7 +57,7 @@
     .nav-links a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .hero {
@@ -64,10 +68,12 @@
     .hero h1 {
       font-size: 2.5em;
       margin-bottom: 0.5em;
+      font-weight: 700;
     }
 
     .hero p {
       font-size: 1.2em;
+      font-weight: 400;
     }
 
     @media (max-width: 768px) {
@@ -78,7 +84,7 @@
       .nav-links {
         display: none;
         flex-direction: column;
-        background-color: #476481;
+        background-color: #000;
         position: absolute;
         top: 60px;
         right: 1em;
