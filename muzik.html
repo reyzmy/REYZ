@@ -3,38 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muzik</title>
+  <title>Muzik - REYZ</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #FFE5B4;
       color: #476481;
       margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #476481;
-      padding: 1em;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .back {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    h1, h2 {
-      margin: 1em;
     }
 
     .music-embed {
       padding: 1em 2em;
+    }
+
+    h2 {
+      margin-top: 2em;
     }
 
     .responsive-embed {
@@ -59,13 +43,93 @@
       border-radius: 12px;
       margin-bottom: 2em;
     }
+
+    /* Navbar styling (same as homepage) */
+    .navbar {
+      background-color: #476481;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      font-size: 24px;
+      display: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1em;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #476481;
+        position: absolute;
+        top: 60px;
+        right: 1em;
+        padding: 1em;
+        border-radius: 8px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
   </style>
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+  </script>
 </head>
 <body>
-  <header>
-    <a href="index.html" class="back">← Kembali</a>
-    <h1>Muzik</h1>
+  <header class="navbar">
+    <div class="logo-title">
+      <img src="images/logo.png" alt="REYZ Logo" class="logo">
+      <span class="title">REYZ</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav-links" class="nav-links">
+      <a href="/">Utama</a>
+      <a href="/galeri/">Galeri</a>
+      <a href="/muzik/">Muzik</a>
+    </nav>
   </header>
+
   <main class="music-embed">
     <h2>Spotify</h2>
     <iframe class="spotify" 
