@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REYZ</title>
-  <link rel="stylesheet" href="style.css"> <!-- optional kalau nak guna fail luar -->
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
@@ -14,7 +14,7 @@
     }
 
     .navbar {
-      background-color: #000000;
+      background-color: #476481;
       color: white;
       display: flex;
       justify-content: space-between;
@@ -22,7 +22,6 @@
       padding: 1em;
       position: sticky;
       top: 0;
-      z-index: 999;
     }
 
     .logo-title {
@@ -38,7 +37,6 @@
     .title {
       font-size: 1.5em;
       font-weight: bold;
-      color: white;
     }
 
     .menu-toggle {
@@ -80,7 +78,7 @@
       .nav-links {
         display: none;
         flex-direction: column;
-        background-color: #000;
+        background-color: #476481;
         position: absolute;
         top: 60px;
         right: 1em;
@@ -96,10 +94,7 @@
   </style>
   <script>
     function toggleMenu() {
-      const nav = document.getElementById("nav-links");
-      if (nav) {
-        nav.classList.toggle("active");
-      }
+      document.getElementById("nav-links").classList.toggle("active");
     }
   </script>
 </head>
