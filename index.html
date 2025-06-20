@@ -7,138 +7,12 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background-color: #FFE5B4;
-      color: #476481;
-    }
-
-    .navbar {
-      background-color: #476481;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1em;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-
-    .logo-title {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo {
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    .title {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-
-    .menu-toggle {
-      font-size: 24px;
-      display: none;
-      cursor: pointer;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1em;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #476481;
-        position: absolute;
-        top: 60px;
-        right: 1em;
-        padding: 1em;
-        border-radius: 8px;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-    }
-
-    .hero {
-      padding: 4em 2em 2em;
-      text-align: center;
-    }
-
+    /* Animasi teks */
     .hero h1 {
-      font-size: 2.2em;
-      margin-bottom: 0.5em;
-      font-weight: 700;
       transition: opacity 0.5s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-    }
-
-    .spotify-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1em;
-      margin-top: 3em;
-      padding: 0 2em 4em;
-    }
-
-    iframe {
-      border-radius: 12px;
+      min-height: 2em;
     }
   </style>
-  <script>
-    function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("active");
-    }
-
-    const greetings = [
-      "Selamat Datang ke REYZ",
-      "REYZ سلامت داتڠ ک",
-      "Welcome to REYZ",
-      "欢迎来到 REYZ",
-      "வணக்கம் REYZ இல்",
-      "Sugeng rawuh ing REYZ",
-      "REYZ에 오신 것을 환영합니다",
-      "Добро пожаловать в REYZ",
-      "ようこそ REYZ へ",
-      "Bienvenido a REYZ",
-      "مرحبا بك في REYZ"
-    ];
-
-    let index = 0;
-    window.addEventListener('DOMContentLoaded', () => {
-      const greetingEl = document.getElementById("greeting");
-      setInterval(() => {
-        greetingEl.style.opacity = 0;
-        setTimeout(() => {
-          index = (index + 1) % greetings.length;
-          greetingEl.textContent = greetings[index];
-          greetingEl.style.opacity = 1;
-        }, 500);
-      }, 3000);
-    });
-  </script>
 </head>
 <body>
   <header class="navbar">
@@ -148,7 +22,7 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav-links" class="nav-links">
-      <a href="/">Utama</a>
+      <a href="/utama">Utama</a>
       <a href="/galeri/">Galeri</a>
       <a href="/muzik/">Muzik</a>
     </nav>
@@ -158,12 +32,54 @@
     <h1 id="greeting">Selamat Datang ke REYZ</h1>
     <p>Muzik. Visual. Kreativiti. Semuanya di sini.</p>
 
-    <div class="spotify-grid">
-      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    <section class="spotify-grid">
+      <!-- Lagu 1–4 -->
+      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+      <!-- Lagu 5–8 -->
+      <iframe src="https://open.spotify.com/embed/track/4pJtq26BIJ3wHSbqSB0ogL?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4fApEIMm0uJQcuBWvJqzxK?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/1rTXntKFSB5tVEGsGUGb9Q?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0qUgBsznQv8TjnOdkT8rl2?utm_source=generator" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </section>
   </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+
+    // Animasi bahasa
+    const greetings = [
+      "Selamat Datang ke REYZ",                   // Melayu
+      "REYZ سلامت داتڠ ک",                        // Jawi
+      "Welcome to REYZ",                          // English
+      "欢迎来到 REYZ",                             // Chinese
+      "வணக்கம் REYZ இல்",                         // Tamil
+      "ยินดีต้อนรับสู่ REYZ",                    // Thai
+      "Chào mừng đến với REYZ",                  // Vietnamese
+      "Sugeng rawuh ing REYZ",                   // Jawa
+      "REYZ에 오신 것을 환영합니다",               // Korean
+      "ようこそ REYZ へ",                          // Japanese
+      "مرحبا بك في REYZ",                         // Arabic
+      "Добро пожаловать в REYZ",                  // Russian
+      "नमस्ते! REYZ में आपका स्वागत है"            // Hindi
+    ];
+
+    let index = 0;
+    const greetingElement = document.getElementById("greeting");
+
+    setInterval(() => {
+      index = (index + 1) % greetings.length;
+      greetingElement.style.opacity = 0;
+      setTimeout(() => {
+        greetingElement.textContent = greetings[index];
+        greetingElement.style.opacity = 1;
+      }, 500);
+    }, 2500);
+  </script>
 </body>
 </html>
