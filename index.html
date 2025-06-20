@@ -5,13 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REYZ</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    .hero h1 {
-      transition: opacity 0.5s ease-in-out;
-      min-height: 2em;
+  <script>
+    const greetings = [
+      "Selamat Datang ke REYZ",
+      "REYZ سلامت داتڠ ک",
+      "Welcome to REYZ",
+      "欢迎来到 REYZ",
+      "வணக்கம் REYZ இல்",
+      "ยินดีต้อนรับสู่ REYZ"
+      "Sugeng rawuh ing REYZ",
+      "REYZ에 오신 것을 환영합니다",
+      "ようこそ REYZ へ",
+      "مرحبا بك في REYZ",
+      "Добро пожаловать в REYZ",
+      "नमस्ते! REYZ में आपका स्वागत है"
+    ];
+    let index = 0;
+    function rotateGreeting() {
+      const el = document.getElementById("greeting");
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = greetings[index];
+        el.style.opacity = 1;
+        index = (index + 1) % greetings.length;
+      }, 500);
     }
-  </style>
+    setInterval(rotateGreeting, 3000);
+    window.onload = rotateGreeting;
+  </script>
 </head>
 <body>
   <header class="navbar">
@@ -21,7 +42,7 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav-links" class="nav-links">
-      <a href="/utama">Utama</a>
+      <a href="/">Utama</a>
       <a href="/galeri/">Galeri</a>
       <a href="/muzik/">Muzik</a>
     </nav>
@@ -29,20 +50,18 @@
 
   <main class="hero">
     <h1 id="greeting">Selamat Datang ke REYZ</h1>
-    <p>Muzik. Visual. Kreativiti. Semuanya di sini.</p>
 
     <section class="spotify-grid">
-      <!-- Lagu 1–4 -->
-      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
+      <!-- 8 Spotify embed -->
+      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-      <!-- Lagu 5–8 -->
-      <iframe src="https://open.spotify.com/embed/track/4pJtq26BIJ3wHSbqSB0ogL?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/4fApEIMm0uJQcuBWvJqzxK?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/1rTXntKFSB5tVEGsGUGb9Q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/0qUgBsznQv8TjnOdkT8rl2?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4pJtq26BIJ3wHSbqSB0ogL?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4fApEIMm0uJQcuBWvJqzxK?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/1rTXntKFSB5tVEGsGUGb9Q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0qUgBsznQv8TjnOdkT8rl2?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </section>
   </main>
 
@@ -50,34 +69,6 @@
     function toggleMenu() {
       document.getElementById("nav-links").classList.toggle("active");
     }
-
-    const greetings = [
-      "Selamat Datang ke REYZ",
-      "REYZ سلامت داتڠ ک",
-      "Welcome to REYZ",
-      "欢迎来到 REYZ",
-      "வணக்கம் REYZ இல்",
-      "ยินดีต้อนรับสู่ REYZ",
-      "Chào mừng đến với REYZ",
-      "Sugeng rawuh ing REYZ",
-      "REYZ에 오신 것을 환영합니다",
-      "ようこそ REYZ へ",
-      "مرحبا بك في REYZ",
-      "Добро пожаловать в REYZ",
-      "नमस्ते! REYZ में आपका स्वागत है"
-    ];
-
-    let index = 0;
-    const greetingElement = document.getElementById("greeting");
-
-    setInterval(() => {
-      index = (index + 1) % greetings.length;
-      greetingElement.style.opacity = 0;
-      setTimeout(() => {
-        greetingElement.textContent = greetings[index];
-        greetingElement.style.opacity = 1;
-      }, 500);
-    }, 2500);
   </script>
 </body>
 </html>
