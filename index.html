@@ -18,7 +18,7 @@
     }
 
     .navbar {
-      background-color: #000; /* Hitam supaya logo biru lebih jelas */
+      background-color: #476481;
       color: white;
       display: flex;
       justify-content: space-between;
@@ -26,6 +26,7 @@
       padding: 1em;
       position: sticky;
       top: 0;
+      z-index: 100;
     }
 
     .logo-title {
@@ -76,6 +77,17 @@
       font-weight: 400;
     }
 
+    .spotify-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1em;
+      margin-top: 3em;
+    }
+
+    .spotify-grid iframe {
+      border-radius: 12px;
+    }
+
     @media (max-width: 768px) {
       .menu-toggle {
         display: block;
@@ -84,7 +96,7 @@
       .nav-links {
         display: none;
         flex-direction: column;
-        background-color: #000;
+        background-color: #476481;
         position: absolute;
         top: 60px;
         right: 1em;
@@ -120,7 +132,25 @@
 
   <main class="hero">
     <h1>Selamat Datang ke REYZ</h1>
-    <p>Muzik. Visual. Kreativiti. Semuanya di sini.</p>
+    <p>Muzik. Visual. Kreativiti. Semuanya ada di sini.</p>
+
+    <section class="spotify-grid">
+      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" 
+        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"></iframe>
+
+      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" 
+        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"></iframe>
+
+      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" 
+        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"></iframe>
+
+      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" 
+        width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy"></iframe>
+    </section>
   </main>
 </body>
 </html>
