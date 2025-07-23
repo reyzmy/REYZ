@@ -1,69 +1,157 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ms">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Home | Four Seasons</title>
-<style>
-body
-{
-	background-color:#CCFFCC;
-	font-family:Arial, Helvetica, sans-serif;
-	margin:0 10%;
-}
-p
-{
-	margin:2 5%;
-	text-align:justify;
-}
-#first-p { margin-top:5%; }
-h3 { text-align:center; }
-a
-{
-	color:#CC0066;
-	text-decoration:none;
-	padding:0 2%;
-}
-a:hover { color:#339966; }
-#here
-{
-	padding:0 2%;
-	color:#339966;
-}
-@font-face
-{
-	font-family:"antonim";
-	src:url(Font/Antonim.otf);
-}
-h1
-{
-	font-family:antonim;
-	font-size:52px;
-	text-align:center;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>REYZ</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <script>
+    const greetings = [
+      "Selamat Datang ke REYZ",
+      "REYZ سلامت داتڠ ک",
+      "Welcome to REYZ",
+      "欢迎来到 REYZ",
+      "வணக்கம் REYZ இல்",
+      "ยินดีต้อนรับสู่ REYZ",
+      "Chào mừng đến với REYZ",
+      "Sugeng rawuh ing REYZ",
+      "REYZ에 오신 것을 환영합니다",
+      "ようこそ REYZ へ",
+      "مرحبا بك في REYZ",
+      "Добро пожаловать в REYZ",
+      "नमस्ते! REYZ में आपका स्वागत है"
+    ];
+    let index = 0;
+    function rotateGreeting() {
+      const el = document.getElementById("greeting");
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = greetings[index];
+        el.style.opacity = 1;
+        index = (index + 1) % greetings.length;
+      }, 500);
+    }
+    setInterval(rotateGreeting, 3000);
+    window.onload = rotateGreeting;
+  </script>
+  <style>
+    .penafian {
+      font-size: 0.8em;
+      color: #777;
+      margin-bottom: 1em;
+      text-align: center;
+      padding: 0 1em;
+    }
+  </style>
 </head>
+<body class="is-preload">
 
-<body>
-<h1>Four Seasons</h1>
-<hr />
-<h3>
-<span id="here">Home</span> |
-  <a href="seasons.html">The Seasons</a> |
-<a href="activities.html">Activities</a></h3>
-<hr />
-<p id="first">
-Welcome to <b>Four season</b> website... Here, we celebrate
-the beauty and unique experiences that each seasons brings.
-</p>
-<p>
-Each season has its own unique charm and offer a range of activities
-and experience to enjoy.
-</p>
-<h3 style="margin-top:5%">
-Explore more in <a href="https://www.livescience.com/">LIVE SCIENCE</a> to <i>Unleash Your Curiousity</i>
-</h3>
-<h5 style="text-align:center">
-&copy; Syahreel Reza 2025
-</h5>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo-title">
+      <img src="images/logo.png" alt="REYZ Logo" class="logo">
+      <span class="title">REYZ</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav-links" class="nav-links">
+      <a href="/">Utama</a>
+      <a href="/galeri/">Galeri</a>
+      <a href="/muzik/">Muzik</a>
+    </nav>
+  </header>
+
+  <!-- Greeting + Spotify -->
+  <main class="hero">
+    <p class="penafian">
+      <strong>Penafian:</strong> Pembangun laman ini masih pemula dan kurang ilmu dalam bidang ini. Oleh yang demikian, <strong>KAU SABAR JAP</strong>, laman ini akan dikemas kini dari semasa ke semasa. Sekian terima gaji :)
+    </p>
+
+    <h1 id="greeting">Selamat Datang ke REYZ</h1>
+
+    <section class="spotify-grid">
+      <iframe src="https://open.spotify.com/embed/track/27lrNsqZRz5aJWvj0HwkBT?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/55rrRr8q35TR2kQvkmjG0q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/11ugP6tU66Ls6oycMGX2iy?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0ZAODcx1tOzkJJXPRbr38O?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4pJtq26BIJ3wHSbqSB0ogL?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4fApEIMm0uJQcuBWvJqzxK?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/1rTXntKFSB5tVEGsGUGb9Q?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/0qUgBsznQv8TjnOdkT8rl2?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </section>
+  </main>
+
+  <!-- Galeri -->
+  <div id="wrapper">
+    <section id="main">
+      <div class="items">
+        <div class="item intro span-2">
+          <h1>Galeri REYZ</h1>
+          <p>From Quiet Hills<br />to busting street</p>
+        </div>
+        <article class="item thumb span-1">
+          <h2>A wooden gazebo</h2>
+          <a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-2">
+          <h2>Ad Infinitum</h2>
+          <a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-1">
+          <h2>A rustic “KORBU VIEW” sign</h2>
+          <a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-1">
+          <h2>Elysium</h2>
+          <a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-3">
+          <h2>A stream flows gently over rocks</h2>
+          <a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-1">
+          <h2>The Pursuit</h2>
+          <a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-2">
+          <h2>Boundless</h2>
+          <a href="images/fulls/07.jpg" class="image"><img src="images/thumbs/07.jpg" alt=""></a>
+        </article>
+        <article class="item thumb span-2">
+          <h2>The Spectators</h2>
+          <a href="images/fulls/08.jpg" class="image"><img src="images/thumbs/08.jpg" alt=""></a>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <section id="footer">
+    <section>
+      <ul class="icons">
+        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+        <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+      </ul>
+      <ul class="copyright">
+        <li>&copy; 2025 REYZ.my</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </section>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.poptrox.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
 </body>
 </html>
