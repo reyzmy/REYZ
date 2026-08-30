@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Your Name</title>
+
+<!--
+  ============================================================
+  HOW TO CUSTOMIZE THIS SITE (read me first)
+  ============================================================
+  1. Search for "YOUR NAME" and "Your Name" — replace with your real name.
+  2. In the HOME section, edit the "job ticket" block (bio facts).
+  3. In BRANDING & POSTER and APPS & WEBSITE sections: each
+     <iframe class="pdf"> has src="pdfs/....pdf" — put your PDF files
+     in a folder named "pdfs" next to this index.html, and rename the
+     src to match. Update the .caption text under each embed too.
+  4. In VIDEO & ANIMATION: each YouTube iframe has
+     src="https://www.youtube.com/embed/VIDEO_ID" — replace VIDEO_ID
+     with the real ID from your video's URL (the part after watch?v=).
+  5. PHOTOGRAPHY: each <img> src points to a placeholder photo. Put
+     your own JPGs in a folder named "photos" next to this file and
+     point src="photos/yourfile.jpg" at them. Mixed portrait/landscape
+     and any resolution is fine — the grid (a CSS "masonry" layout)
+     sizes every photo to the column width and keeps its natural
+     height, so nothing gets stretched or cropped. Just avoid using
+     huge original files directly on the web — resize the long edge
+     to roughly 1600–2000px and export as JPG quality ~75–85% so the
+     page loads fast.
+  6. Update contact info in the sidebar footer.
+  7. Add or remove "plate"/"photo-card" items freely — copy an
+     existing one.
+  8. LANGUAGE TOGGLE: any element with a data-en="..." attribute is
+     switchable. Add a matching data-ms="..." attribute with the Malay
+     text and it will swap automatically when EN/BM is clicked — no
+     script changes needed. If you add new text and only set data-en,
+     it will just stay in English when BM is selected.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#FAFAF7;
+    --paper-dim:#F0F0EC;
+    --ink:#111111;
+    --ink-soft:rgba(17,17,17,0.55);
+    --ink-faint:rgba(17,17,17,0.15);
+    --cyan:#00AEEF;
+    --magenta:#EC008C;
+    --yellow:#FFD400;
+    --key:#111111;
+    --font-display:'Anton', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --sidebar-w:250px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+  }
+  img{max-width:100%;}
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:3px solid var(--cyan);
+    outline-offset:2px;
+  }
+
+  /* ---------- registration marks (decorative, fixed corners) ---------- */
+  .reg-mark{
+    position:fixed;
+    width:26px;height:26px;
+    border:1px solid var(--ink);
+    border-radius:50%;
+    opacity:0.12;
+    pointer-events:none;
+    z-index:5;
+  }
+  .reg-mark::before,.reg-mark::after{content:'';position:absolute;background:var(--ink);}
+  .reg-mark::before{top:50%;left:-8px;right:-8px;height:1px;transform:translateY(-50%);}
+  .reg-mark::after{left:50%;top:-8px;bottom:-8px;width:1px;transform:translateX(-50%);}
+  .reg-tl{top:14px;left:calc(var(--sidebar-w) + 14px);}
+  .reg-tr{top:14px;right:14px;}
+  .reg-bl{bottom:14px;left:calc(var(--sidebar-w) + 14px);}
+  .reg-br{bottom:14px;right:14px;}
+
+  /* ---------- crop marks on plates ---------- */
+  .plate{position:relative;}
+  .plate .corner{position:absolute;width:14px;height:14px;pointer-events:none;}
+  .plate .corner::before,.plate .corner::after{content:'';position:absolute;background:var(--ink);opacity:0.5;}
+  .corner-tl{top:-7px;left:-7px;}
+  .corner-tl::before{width:14px;height:1px;top:0;left:0;}
+  .corner-tl::after{width:1px;height:14px;top:0;left:0;}
+  .corner-tr{top:-7px;right:-7px;}
+  .corner-tr::before{width:14px;height:1px;top:0;right:0;}
+  .corner-tr::after{width:1px;height:14px;top:0;right:0;}
+  .corner-bl{bottom:-7px;left:-7px;}
+  .corner-bl::before{width:14px;height:1px;bottom:0;left:0;}
+  .corner-bl::after{width:1px;height:14px;bottom:0;left:0;}
+  .corner-br{bottom:-7px;right:-7px;}
+  .corner-br::before{width:14px;height:1px;bottom:0;right:0;}
+  .corner-br::after{width:1px;height:14px;bottom:0;right:0;}
+
+  /* ---------- sidebar / nav ---------- */
+  .sidebar{
+    position:fixed;
+    top:0;left:0;bottom:0;
+    width:var(--sidebar-w);
+    border-right:2px solid var(--ink);
+    display:flex;
+    flex-direction:column;
+    padding:28px 22px;
+    z-index:40;
+    background:var(--paper);
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:1.6rem;
+    text-transform:uppercase;
+    line-height:1.05;
+    letter-spacing:0.01em;
+    margin-bottom:20px;
+  }
+  .brand span{display:block;}
+
+  .sidebar-controls{margin-bottom:24px;}
+
+  .lang-toggle{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden;}
+  .lang-btn{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:0.05em;
+    padding:5px 13px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .lang-btn:not(:last-child){border-right:1px solid var(--ink);}
+  .lang-btn.active{background:var(--ink);color:var(--paper);}
+
+  .nav-list{list-style:none;margin:0;padding:0;flex:1;}
+  .nav-list li{margin-bottom:4px;}
+  .nav-item{
+    display:flex;
+    align-items:center;
+    width:100%;
+    background:none;
+    border:none;
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--ink);
+    padding:10px 10px;
+    cursor:pointer;
+    border-radius:2px;
+  }
+  .nav-item:hover{background:var(--paper-dim);}
+  .nav-item.active{font-weight:700;}
+  .nav-item[data-target="brand-poster"].active{background:rgba(0,174,239,0.12);}
+  .nav-item[data-target="video-anim"].active{background:rgba(236,0,140,0.10);}
+  .nav-item[data-target="apps-web"].active{background:rgba(255,212,0,0.20);}
+  .nav-item[data-target="photography"].active{background:rgba(17,17,17,0.08);}
+
+  .ink-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:10px;border:1px solid rgba(0,0,0,0.25);flex-shrink:0;}
+  .ink-none{background:transparent;}
+  .ink-c{background:var(--cyan);}
+  .ink-m{background:var(--magenta);}
+  .ink-y{background:var(--yellow);}
+  .ink-k{background:var(--key);}
+
+  .sidebar-footer{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    line-height:1.7;
+    padding-top:16px;
+    border-top:1px dashed var(--ink-faint);
+  }
+  .sidebar-footer a{text-decoration:underline;}
+
+  .mobile-nav-toggle{
+    display:none;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:8px 14px;
+    cursor:pointer;
+  }
+
+  /* ---------- main / panels ---------- */
+  main{
+    margin-left:var(--sidebar-w);
+    padding:64px 56px 100px;
+    max-width:1180px;
+  }
+  .panel[hidden]{display:none;}
+
+  .section-header{margin-bottom:44px;}
+  .plate-no{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .section-header h2{
+    font-family:var(--font-display);
+    font-size:clamp(2.1rem,4.5vw,3.4rem);
+    text-transform:uppercase;
+    margin:6px 0 16px;
+    letter-spacing:0.005em;
+  }
+  .bar{height:7px;width:110px;}
+  .bar.c{background:var(--cyan);}
+  .bar.m{background:var(--magenta);}
+  .bar.y{background:var(--yellow);}
+  .bar.k{background:var(--key);}
+  .section-intro{max-width:60ch;color:var(--ink-soft);margin-top:16px;}
+
+  /* ---------- home ---------- */
+  .hero{padding-top:12px;padding-bottom:56px;border-bottom:2px solid var(--ink);margin-bottom:56px;}
+  .eyebrow{font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);}
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(3rem,9vw,6.4rem);
+    line-height:0.95;
+    text-transform:uppercase;
+    margin:10px 0 18px;
+  }
+  .hero p.role{font-size:1.15rem;max-width:56ch;margin-bottom:36px;}
+
+  .home-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start;}
+  @media (max-width:860px){.home-grid{grid-template-columns:1fr;}}
+
+  .ticket{border:2px solid var(--ink);padding:22px 24px;font-family:var(--font-mono);font-size:0.82rem;background:#fff;}
+  .ticket-title{text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--ink-soft);margin-bottom:10px;}
+  .ticket-row{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed var(--ink-faint);}
+  .ticket-row:last-child{border-bottom:none;}
+  .ticket-row .label{color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em;flex-shrink:0;}
+  .ticket-row .value{text-align:right;}
+  .inks-row{display:flex;gap:8px;justify-content:flex-end;}
+  .inks-row .ink-dot{margin:0;}
+
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:600px){.tiles{grid-template-columns:1fr;}}
+  .tile{
+    position:relative;
+    background:#fff;
+    border:2px solid var(--ink);
+    padding:24px 20px 20px;
+    cursor:pointer;
+    overflow:hidden;
+    font:inherit;
+    text-align:left;
+    color:inherit;
+  }
+  .tile .stripe{position:absolute;top:0;left:0;right:0;height:6px;}
+  .tile.c .stripe{background:var(--cyan);}
+  .tile.m .stripe{background:var(--magenta);}
+  .tile.y .stripe{background:var(--yellow);}
+  .tile.k .stripe{background:var(--key);}
+  .tile .plate-no{display:block;margin-bottom:10px;}
+  .tile h3{font-family:var(--font-display);font-size:1.25rem;text-transform:uppercase;margin:0 0 8px;letter-spacing:0.01em;}
+  .tile .go{font-family:var(--font-mono);font-size:0.75rem;color:var(--ink-soft);}
+  .tile:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);}
+  .tile:hover .go{color:var(--ink);}
+
+  /* ---------- work grids ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:52px 32px;}
+  .plate-card{background:#fff;border:1px solid var(--ink-faint);padding:18px;}
+  .frame{background:var(--paper-dim);}
+  iframe.pdf{width:100%;height:480px;border:none;display:block;}
+  .video-wrap{position:relative;padding-top:56.25%;height:0;overflow:hidden;}
+  .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+  .caption{margin-top:14px;font-family:var(--font-mono);}
+  .caption .proj{font-weight:700;text-transform:uppercase;font-size:0.85rem;letter-spacing:0.02em;}
+  .caption .meta{font-size:0.75rem;color:var(--ink-soft);margin-top:3px;}
+  .fallback{display:inline-block;margin-top:10px;font-family:var(--font-mono);font-size:0.72rem;text-decoration:underline;}
+
+  /* ---------- photography masonry ---------- */
+  .photo-grid{
+    column-width:260px;
+    column-count:4;
+    column-gap:24px;
+  }
+  .photo-card{
+    display:inline-block;
+    width:100%;
+    break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+    page-break-inside:avoid;
+    margin:0 0 24px;
+    background:#fff;
+    border:1px solid var(--ink-faint);
+    padding:16px;
+  }
+  .photo-card img{width:100%;height:auto;display:block;}
+
+  footer.page-end{
+    margin-top:80px;
+    padding-top:24px;
+    border-top:1px dashed var(--ink-faint);
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .tile:hover{transform:none;box-shadow:none;}
+  }
+
+  /* ---------- mobile ---------- */
+  @media (max-width:860px){
+    .sidebar{
+      position:fixed;
+      top:0;left:0;right:0;bottom:auto;
+      width:auto;
+      height:64px;
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+      border-right:none;
+      border-bottom:2px solid var(--ink);
+      padding:0 18px;
+    }
+    .brand{margin:0;font-size:1.2rem;}
+    .sidebar-controls{margin-bottom:0;display:flex;align-items:center;gap:10px;}
+    .nav-list{
+      position:fixed;
+      top:64px;left:0;right:0;
+      flex-direction:column;
+      background:var(--paper);
+      border-bottom:2px solid var(--ink);
+      transform:translateY(-120%);
+      transition:transform 0.25s ease;
+      padding:10px 18px 18px;
+      max-height:70vh;
+      overflow-y:auto;
+    }
+    .sidebar.open .nav-list{transform:translateY(0);}
+    .sidebar-footer{display:none;}
+    .mobile-nav-toggle{display:block;}
+    main{margin-left:0;margin-top:64px;padding:40px 22px 80px;}
+    .reg-mark{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<span class="reg-mark reg-tl" aria-hidden="true"></span>
+<span class="reg-mark reg-tr" aria-hidden="true"></span>
+<span class="reg-mark reg-bl" aria-hidden="true"></span>
+<span class="reg-mark reg-br" aria-hidden="true"></span>
+
+<nav class="sidebar" aria-label="Portfolio sections">
+  <div class="brand"><span>YOUR</span><span>NAME</span></div>
+
+  <div class="sidebar-controls">
+    <div class="lang-toggle" role="group" aria-label="Language / Bahasa">
+      <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-btn" data-lang="ms" aria-pressed="false">BM</button>
+    </div>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-en="Menu" data-ms="Menu">Menu</button>
+  </div>
+
+  <ul class="nav-list" role="tablist" aria-orientation="vertical">
+    <li role="presentation">
+      <button class="nav-item active" role="tab" id="tab-home" aria-controls="home" aria-selected="true" data-target="home">
+        <span class="ink-dot ink-none" aria-hidden="true"></span><span data-en="Home" data-ms="Laman Utama">Home</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-brand-poster" aria-controls="brand-poster" aria-selected="false" data-target="brand-poster">
+        <span class="ink-dot ink-c" aria-hidden="true"></span><span data-en="Branding & Poster" data-ms="Jenama & Poster">Branding &amp; Poster</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-video-anim" aria-controls="video-anim" aria-selected="false" data-target="video-anim">
+        <span class="ink-dot ink-m" aria-hidden="true"></span><span data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-apps-web" aria-controls="apps-web" aria-selected="false" data-target="apps-web">
+        <span class="ink-dot ink-y" aria-hidden="true"></span><span data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-photography" aria-controls="photography" aria-selected="false" data-target="photography">
+        <span class="ink-dot ink-k" aria-hidden="true"></span><span data-en="Photography" data-ms="Fotografi">Photography</span>
+      </button>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    EMAIL: hello@yourname.com<br>
+    INSTAGRAM: @yourhandle<br>
+    STATUS: <span data-en="OPEN FOR WORK" data-ms="TERBUKA UNTUK KERJA">OPEN FOR WORK</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="panel" role="tabpanel" aria-labelledby="tab-home" tabindex="-1">
+    <div class="hero">
+      <div class="eyebrow">Portfolio · 2026</div>
+      <h1>Your Name</h1>
+      <p class="role" data-en="Multidisciplinary designer working across brand identity, print, motion, web/app design and photography. Scroll the menu on the left — or the tiles below — to open each body of work." data-ms="Pereka pelbagai disiplin yang menceburi bidang identiti jenama, cetakan, animasi, reka bentuk aplikasi/laman web dan fotografi. Gunakan menu di sebelah kiri — atau kotak di bawah — untuk membuka setiap koleksi kerja.">Multidisciplinary designer working across brand identity, print, motion, web/app design and photography. Scroll the menu on the left — or the tiles below — to open each body of work.</p>
+    </div>
+
+    <div class="home-grid">
+      <div class="ticket">
+        <div class="ticket-title" data-en="Job Ticket" data-ms="Tiket Kerja">Job Ticket</div>
+        <div class="ticket-row"><span class="label" data-en="Discipline" data-ms="Bidang">Discipline</span><span class="value" data-en="Brand · Print · Motion · Web · Photo" data-ms="Jenama · Cetakan · Animasi · Web · Foto">Brand · Print · Motion · Web · Photo</span></div>
+        <div class="ticket-row"><span class="label" data-en="Based in" data-ms="Berpangkalan di">Based in</span><span class="value">City, Country</span></div>
+        <div class="ticket-row"><span class="label" data-en="Tools" data-ms="Alat">Tools</span><span class="value">Illustrator, Premiere, AE</span></div>
+        <div class="ticket-row"><span class="label" data-en="Available for" data-ms="Tersedia untuk">Available for</span><span class="value" data-en="Freelance / Full-time" data-ms="Bebas / Sepenuh Masa">Freelance / Full-time</span></div>
+        <div class="ticket-row"><span class="label" data-en="Inks" data-ms="Dakwat">Inks</span>
+          <span class="value inks-row">
+            <span class="ink-dot ink-c" aria-hidden="true"></span>
+            <span class="ink-dot ink-m" aria-hidden="true"></span>
+            <span class="ink-dot ink-y" aria-hidden="true"></span>
+            <span class="ink-dot ink-k" aria-hidden="true"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="tiles">
+        <button class="tile c" data-target="brand-poster">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 01" data-ms="Plat 01">Plate 01</span>
+          <h3 data-en="Branding & Poster" data-ms="Jenama & Poster">Branding &amp; Poster</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+        <button class="tile m" data-target="video-anim">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 02" data-ms="Plat 02">Plate 02</span>
+          <h3 data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</h3>
+          <span class="go" data-en="Watch →" data-ms="Tonton →">Watch →</span>
+        </button>
+        <button class="tile y" data-target="apps-web">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 03" data-ms="Plat 03">Plate 03</span>
+          <h3 data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+        <button class="tile k" data-target="photography">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 04" data-ms="Plat 04">Plate 04</span>
+          <h3 data-en="Photography" data-ms="Fotografi">Photography</h3>
+          <span class="go" data-en="View gallery →" data-ms="Lihat galeri →">View gallery →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BRANDING & POSTER (PDF embeds) ============ -->
+  <section id="brand-poster" class="panel" role="tabpanel" aria-labelledby="tab-brand-poster" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 01 / Ink: Cyan" data-ms="Plat 01 / Dakwat: Sian">Plate 01 / Ink: Cyan</span>
+      <h2 data-en="Branding & Poster" data-ms="Jenama & Poster">Branding &amp; Poster</h2>
+      <div class="bar c"></div>
+      <p class="section-intro" data-en="Identity systems, wordmarks and print posters — logo work and poster work together in one place. Each panel below embeds a PDF, replace the file path with your own." data-ms="Sistem identiti, wordmark dan poster cetak — kerja logo dan poster digabungkan di sini. Setiap panel di bawah memaparkan fail PDF; gantikan laluan fail dengan fail anda sendiri.">Identity systems, wordmarks and print posters — logo work and poster work together in one place. Each panel below embeds a PDF, replace the file path with your own.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-seagames.pdf" title="Branding project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Project Name 01" data-ms="Nama Projek 01">Project Name 01</div>
+          <div class="meta" data-en="Client — Year — Logo & identity" data-ms="Klien — Tahun — Logo & identiti">Client — Year — Logo &amp; identity</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-seagames.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-kmdim.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-kmdim.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-capyzza.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-capyzza.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-msme.pdf" title="Branding project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Project Name 02" data-ms="Nama Projek 02">Project Name 02</div>
+          <div class="meta" data-en="Client — Year — Brand guidelines" data-ms="Klien — Tahun — Garis panduan jenama">Client — Year — Brand guidelines</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-msme.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-bayangkencana.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-bayangkencana.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-hydr8.pdf" title="Poster project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Tistle 02" data-ms="Tajusk Poster 02">Poster Title 02</div>
+          <div class="meta" data-en="Client — Year — Campaign series" data-ms="Klien — Tahun — Siri kempen">Client — Year — Campaign series</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-hydr8.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-kinetique.pdf" title="Poster project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Tistle 02" data-ms="Tajusk Poster 02">Poster Title 02</div>
+          <div class="meta" data-en="Client — Year — Campaign series" data-ms="Klien — Tahun — Siri kempen">Client — Year — Campaign series</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-kinetique.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-orecheez.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-orecheez.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-anrcraft.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-anrcraft.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-unimc.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-unimc.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-tessera.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-tessera.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-miskinah.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-miskinah.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-mahhir.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-mahhir.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-memora.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-memora.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-dapurbatik.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Poster Title 01" data-ms="Tajuk Poster 01">Poster Title 01</div>
+          <div class="meta" data-en="Client — Year — Event poster" data-ms="Klien — Tahun — Poster acara">Client — Year — Event poster</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-dapurbatik.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ VIDEO & ANIMATION (YouTube embeds) ============ -->
+  <section id="video-anim" class="panel" role="tabpanel" aria-labelledby="tab-video-anim" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 02 / Ink: Magenta" data-ms="Plat 02 / Dakwat: Magenta">Plate 02 / Ink: Magenta</span>
+      <h2 data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</h2>
+      <div class="bar m"></div>
+      <p class="section-intro" data-en="Short films, video production and animation reels together, embedded from YouTube. Replace VIDEO_ID in each iframe with your own video's ID." data-ms="Filem pendek, produksi video dan reel animasi digabungkan di sini, dipaparkan daripada YouTube. Gantikan VIDEO_ID pada setiap iframe dengan ID video anda sendiri.">Short films, video production and animation reels together, embedded from YouTube. Replace VIDEO_ID in each iframe with your own video's ID.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/hijfJRkvHKI" title="Short film 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Short Film Title 01" data-ms="Tajuk Filem Pendek 01">Short Film Title 01</div>
+          <div class="meta" data-en="Role — Director / Editor — Year" data-ms="Peranan — Pengarah / Penyunting — Tahun">Role — Director / Editor — Year</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/NOZ4xJ4D6Wc" title="Short film 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Short Film Title 02" data-ms="Tajuk Filem Pendek 02">Short Film Title 02</div>
+          <div class="meta" data-en="Role — Cinematographer — Year" data-ms="Peranan — Jurukamera — Tahun">Role — Cinematographer — Year</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/qIQgc1qHJCo" title="Animation project 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 01" data-ms="Tajuk Animasi 01">Animation Title 01</div>
+          <div class="meta" data-en="2D / Motion Graphics — Year" data-ms="2D / Motion Graphic — Tahun">2D / Motion Graphics — Year</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/YGat-Dc73mQ" title="Animation project 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 02" data-ms="Tajuk Animasi 02">Animation Title 02</div>
+          <div class="meta" data-en="3D / Character — Year" data-ms="3D / Watak — Tahun">3D / Character — Year</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/auJIaGA-go0" title="Animation project 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 02" data-ms="Tajuk Animasi 02">Animation Title 02</div>
+          <div class="meta" data-en="3D / Character — Year" data-ms="3D / Watak — Tahun">3D / Character — Year</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/lkRiKHcdXWU" title="Animation project 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 02" data-ms="Tajuk Animasi 02">Animation Title 02</div>
+          <div class="meta" data-en="3D / Character — Year" data-ms="3D / Watak — Tahun">3D / Character — Year</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/henPiYN9Lrg" title="Animation project 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 02" data-ms="Tajuk Animasi 02">Animation Title 02</div>
+          <div class="meta" data-en="3D / Character — Year" data-ms="3D / Watak — Tahun">3D / Character — Year</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/3ZwicxS5Bvo" title="Animation project 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Title 02" data-ms="Tajuk Animasi 02">Animation Title 02</div>
+          <div class="meta" data-en="3D / Character — Year" data-ms="3D / Watak — Tahun">3D / Character — Year</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ APPS & WEBSITE (PDF embeds) ============ -->
+  <section id="apps-web" class="panel" role="tabpanel" aria-labelledby="tab-apps-web" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 03 / Ink: Yellow" data-ms="Plat 03 / Dakwat: Kuning">Plate 03 / Ink: Yellow</span>
+      <h2 data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</h2>
+      <div class="bar y"></div>
+      <p class="section-intro" data-en="App and website design work — UI screens, prototypes and case studies. Each panel below embeds a PDF, replace the file path with your own." data-ms="Kerja reka bentuk aplikasi dan laman web — skrin UI, prototaip dan kajian kes. Setiap panel di bawah memaparkan fail PDF; gantikan laluan fail dengan fail anda sendiri.">App and website design work — UI screens, prototypes and case studies. Each panel below embeds a PDF, replace the file path with your own.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/app-memora.pdf" title="App or website project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Project Name 01" data-ms="Nama Projek 01">Project Name 01</div>
+          <div class="meta" data-en="Client — Year — Mobile app UI" data-ms="Klien — Tahun — UI aplikasi mudah alih">Client — Year — Mobile app UI</div>
+        </div>
+        <a class="fallback" href="pdfs/app-memora.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/web-gerabak18.pdf" title="App or website project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Project Name 02" data-ms="Nama Projek 02">Project Name 02</div>
+          <div class="meta" data-en="Client — Year — Website redesign" data-ms="Klien — Tahun — Reka bentuk semula laman web">Client — Year — Website redesign</div>
+        </div>
+        <a class="fallback" href="pdfs/web-gerabak18.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/web-minitour.pdf" title="App or website project 3 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Project Name 03" data-ms="Nama Projek 03">Project Name 03</div>
+          <div class="meta" data-en="Client — Year — Product landing page" data-ms="Klien — Tahun — Laman pendaratan produk">Client — Year — Product landing page</div>
+        </div>
+        <a class="fallback" href="pdfs/web-minitour.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ PHOTOGRAPHY (JPG masonry grid) ============ -->
+  <section id="photography" class="panel" role="tabpanel" aria-labelledby="tab-photography" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 04 / Ink: Key (Black)" data-ms="Plat 04 / Dakwat: Key (Hitam)">Plate 04 / Ink: Key (Black)</span>
+      <h2 data-en="Photography" data-ms="Fotografi">Photography</h2>
+      <div class="bar k"></div>
+      <p class="section-intro" data-en="A running set of photos. Each image keeps its own size and orientation — portrait, landscape, any resolution — the grid below adjusts automatically, no cropping needed." data-ms="Koleksi foto berterusan. Setiap imej mengekalkan saiz dan orientasi asal — potret, lanskap, sebarang resolusi — grid di bawah menyesuaikan secara automatik tanpa perlu memotong imej.">A running set of photos. Each image keeps its own size and orientation — portrait, landscape, any resolution — the grid below adjusts automatically, no cropping needed.</p>
+    </div>
+
+    <div class="photo-grid">
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 01" data-ms="Tajuk Foto 01">Photo Title 01</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_3.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 02" data-ms="Tajuk Foto 02">Photo Title 02</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_4.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 03" data-ms="Tajuk Foto 03">Photo Title 03</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_6.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 04" data-ms="Tajuk Foto 04">Photo Title 04</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Street_6.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 05" data-ms="Tajuk Foto 05">Photo Title 05</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Street_8.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 06" data-ms="Tajuk Foto 06">Photo Title 06</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Cultural_1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Cultural_8.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 08" data-ms="Tajuk Foto 08">Photo Title 08</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Hero_Prop_Shot.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/kupon.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/puyuh.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/batik.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/anggun.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/pingpong.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/selipar.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/laki.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/undi.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/tangkak.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/lostworld.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Photo Title 07" data-ms="Tajuk Foto 07">Photo Title 07</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+      
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+  </section>
+
+</main>
+
+<script>
+  (function(){
+    var panels = document.querySelectorAll('.panel');
+    var navButtons = document.querySelectorAll('.nav-item');
+    var jumpButtons = document.querySelectorAll('[data-target]');
+    var sidebar = document.querySelector('.sidebar');
+    var mobileToggle = document.querySelector('.mobile-nav-toggle');
+    var validTargets = ['home','brand-poster','video-anim','apps-web','photography'];
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function switchPanel(target){
+      if(validTargets.indexOf(target) === -1) target = 'home';
+
+      panels.forEach(function(p){ p.hidden = (p.id !== target); });
+
+      navButtons.forEach(function(btn){
+        var isActive = btn.dataset.target === target;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      sidebar.classList.remove('open');
+      if(mobileToggle) mobileToggle.setAttribute('aria-expanded','false');
+
+      var panel = document.getElementById(target);
+      if(panel){ panel.focus({preventScroll:true}); }
+
+      window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+      history.replaceState(null, '', '#' + target);
+    }
+
+    jumpButtons.forEach(function(el){
+      el.addEventListener('click', function(){ switchPanel(el.dataset.target); });
+    });
+
+    if(mobileToggle){
+      mobileToggle.addEventListener('click', function(){
+        var isOpen = sidebar.classList.toggle('open');
+        mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    var initial = location.hash.replace('#','');
+    switchPanel(validTargets.indexOf(initial) !== -1 ? initial : 'home');
+
+    /* ---------- language toggle (EN / BM) ---------- */
+    var langButtons = document.querySelectorAll('.lang-btn');
+    var i18nEls = document.querySelectorAll('[data-en]');
+
+    function setLanguage(lang){
+      document.documentElement.lang = lang;
+      i18nEls.forEach(function(el){
+        var text = el.getAttribute('data-' + lang);
+        if(text === null){ text = el.getAttribute('data-en'); }
+        el.textContent = text;
+      });
+      langButtons.forEach(function(btn){
+        var isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
+
+    langButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){ setLanguage(btn.dataset.lang); });
+    });
+  })();
+</script>
+
+</body>
+</html>
