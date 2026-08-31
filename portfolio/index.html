@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Syahreel Reza</title>
+
+<!--
+  ============================================================
+  HOW TO CUSTOMIZE THIS SITE (read me first)
+  ============================================================
+  1. Search for "YOUR NAME" and "Your Name" — replace with your real name.
+  2. In the HOME section, edit the "job ticket" block (bio facts).
+  3. In BRANDING & POSTER and APPS & WEBSITE sections: each
+     <iframe class="pdf"> has src="pdfs/....pdf" — put your PDF files
+     in a folder named "pdfs" next to this index.html, and rename the
+     src to match. Update the .caption text under each embed too.
+  4. In VIDEO & ANIMATION: each YouTube iframe has
+     src="https://www.youtube.com/embed/VIDEO_ID" — replace VIDEO_ID
+     with the real ID from your video's URL (the part after watch?v=).
+  5. PHOTOGRAPHY: each <img> src points to a placeholder photo. Put
+     your own JPGs in a folder named "photos" next to this file and
+     point src="photos/yourfile.jpg" at them. Mixed portrait/landscape
+     and any resolution is fine — the grid (a CSS "masonry" layout)
+     sizes every photo to the column width and keeps its natural
+     height, so nothing gets stretched or cropped. Just avoid using
+     huge original files directly on the web — resize the long edge
+     to roughly 1600–2000px and export as JPG quality ~75–85% so the
+     page loads fast.
+  6. Update contact info in the sidebar footer.
+  7. Add or remove "plate"/"photo-card" items freely — copy an
+     existing one.
+  8. LANGUAGE TOGGLE: any element with a data-en="..." attribute is
+     switchable. Add a matching data-ms="..." attribute with the Malay
+     text and it will swap automatically when EN/BM is clicked — no
+     script changes needed. If you add new text and only set data-en,
+     it will just stay in English when BM is selected.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#FAFAF7;
+    --paper-dim:#F0F0EC;
+    --ink:#111111;
+    --ink-soft:rgba(17,17,17,0.55);
+    --ink-faint:rgba(17,17,17,0.15);
+    --cyan:#00AEEF;
+    --magenta:#EC008C;
+    --yellow:#FFD400;
+    --key:#111111;
+    --font-display:'Anton', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --sidebar-w:250px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+  }
+  img{max-width:100%;}
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:3px solid var(--cyan);
+    outline-offset:2px;
+  }
+
+  /* ---------- registration marks (decorative, fixed corners) ---------- */
+  .reg-mark{
+    position:fixed;
+    width:26px;height:26px;
+    border:1px solid var(--ink);
+    border-radius:50%;
+    opacity:0.12;
+    pointer-events:none;
+    z-index:5;
+  }
+  .reg-mark::before,.reg-mark::after{content:'';position:absolute;background:var(--ink);}
+  .reg-mark::before{top:50%;left:-8px;right:-8px;height:1px;transform:translateY(-50%);}
+  .reg-mark::after{left:50%;top:-8px;bottom:-8px;width:1px;transform:translateX(-50%);}
+  .reg-tl{top:14px;left:calc(var(--sidebar-w) + 14px);}
+  .reg-tr{top:14px;right:14px;}
+  .reg-bl{bottom:14px;left:calc(var(--sidebar-w) + 14px);}
+  .reg-br{bottom:14px;right:14px;}
+
+  /* ---------- crop marks on plates ---------- */
+  .plate{position:relative;}
+  .plate .corner{position:absolute;width:14px;height:14px;pointer-events:none;}
+  .plate .corner::before,.plate .corner::after{content:'';position:absolute;background:var(--ink);opacity:0.5;}
+  .corner-tl{top:-7px;left:-7px;}
+  .corner-tl::before{width:14px;height:1px;top:0;left:0;}
+  .corner-tl::after{width:1px;height:14px;top:0;left:0;}
+  .corner-tr{top:-7px;right:-7px;}
+  .corner-tr::before{width:14px;height:1px;top:0;right:0;}
+  .corner-tr::after{width:1px;height:14px;top:0;right:0;}
+  .corner-bl{bottom:-7px;left:-7px;}
+  .corner-bl::before{width:14px;height:1px;bottom:0;left:0;}
+  .corner-bl::after{width:1px;height:14px;bottom:0;left:0;}
+  .corner-br{bottom:-7px;right:-7px;}
+  .corner-br::before{width:14px;height:1px;bottom:0;right:0;}
+  .corner-br::after{width:1px;height:14px;bottom:0;right:0;}
+
+  /* ---------- sidebar / nav ---------- */
+  .sidebar{
+    position:fixed;
+    top:0;left:0;bottom:0;
+    width:var(--sidebar-w);
+    border-right:2px solid var(--ink);
+    display:flex;
+    flex-direction:column;
+    padding:28px 22px;
+    z-index:40;
+    background:var(--paper);
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:1.6rem;
+    text-transform:uppercase;
+    line-height:1.05;
+    letter-spacing:0.01em;
+    margin-bottom:20px;
+  }
+  .brand span{display:block;}
+
+  .sidebar-controls{margin-bottom:24px;}
+
+  .lang-toggle{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden;}
+  .lang-btn{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:0.05em;
+    padding:5px 13px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .lang-btn:not(:last-child){border-right:1px solid var(--ink);}
+  .lang-btn.active{background:var(--ink);color:var(--paper);}
+
+  .nav-list{list-style:none;margin:0;padding:0;flex:1;}
+  .nav-list li{margin-bottom:4px;}
+  .nav-item{
+    display:flex;
+    align-items:center;
+    width:100%;
+    background:none;
+    border:none;
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--ink);
+    padding:10px 10px;
+    cursor:pointer;
+    border-radius:2px;
+  }
+  .nav-item:hover{background:var(--paper-dim);}
+  .nav-item.active{font-weight:700;}
+  .nav-item[data-target="brand-poster"].active{background:rgba(0,174,239,0.12);}
+  .nav-item[data-target="video-anim"].active{background:rgba(236,0,140,0.10);}
+  .nav-item[data-target="apps-web"].active{background:rgba(255,212,0,0.20);}
+  .nav-item[data-target="photography"].active{background:rgba(17,17,17,0.08);}
+
+  .ink-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:10px;border:1px solid rgba(0,0,0,0.25);flex-shrink:0;}
+  .ink-none{background:transparent;}
+  .ink-c{background:var(--cyan);}
+  .ink-m{background:var(--magenta);}
+  .ink-y{background:var(--yellow);}
+  .ink-k{background:var(--key);}
+
+  .sidebar-footer{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    line-height:1.7;
+    padding-top:16px;
+    border-top:1px dashed var(--ink-faint);
+  }
+  .sidebar-footer a{text-decoration:underline;}
+
+  .mobile-nav-toggle{
+    display:none;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:8px 14px;
+    cursor:pointer;
+  }
+
+  /* ---------- main / panels ---------- */
+  main{
+    margin-left:var(--sidebar-w);
+    padding:64px 56px 100px;
+    max-width:1180px;
+  }
+  .panel[hidden]{display:none;}
+
+  .section-header{margin-bottom:44px;}
+  .plate-no{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .section-header h2{
+    font-family:var(--font-display);
+    font-size:clamp(2.1rem,4.5vw,3.4rem);
+    text-transform:uppercase;
+    margin:6px 0 16px;
+    letter-spacing:0.005em;
+  }
+  .bar{height:7px;width:110px;}
+  .bar.c{background:var(--cyan);}
+  .bar.m{background:var(--magenta);}
+  .bar.y{background:var(--yellow);}
+  .bar.k{background:var(--key);}
+  .section-intro{max-width:60ch;color:var(--ink-soft);margin-top:16px;}
+
+  /* ---------- home ---------- */
+  .hero{padding-top:12px;padding-bottom:56px;border-bottom:2px solid var(--ink);margin-bottom:56px;}
+  .eyebrow{font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);}
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(3rem,9vw,6.4rem);
+    line-height:0.95;
+    text-transform:uppercase;
+    margin:10px 0 18px;
+  }
+  .hero p.role{font-size:1.15rem;max-width:56ch;margin-bottom:36px;}
+
+  .home-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start;}
+  @media (max-width:860px){.home-grid{grid-template-columns:1fr;}}
+
+  .ticket{border:2px solid var(--ink);padding:22px 24px;font-family:var(--font-mono);font-size:0.82rem;background:#fff;}
+  .ticket-title{text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--ink-soft);margin-bottom:10px;}
+  .ticket-row{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed var(--ink-faint);}
+  .ticket-row:last-child{border-bottom:none;}
+  .ticket-row .label{color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em;flex-shrink:0;}
+  .ticket-row .value{text-align:right;}
+  .inks-row{display:flex;gap:8px;justify-content:flex-end;}
+  .inks-row .ink-dot{margin:0;}
+
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:600px){.tiles{grid-template-columns:1fr;}}
+  .tile{
+    position:relative;
+    background:#fff;
+    border:2px solid var(--ink);
+    padding:24px 20px 20px;
+    cursor:pointer;
+    overflow:hidden;
+    font:inherit;
+    text-align:left;
+    color:inherit;
+  }
+  .tile .stripe{position:absolute;top:0;left:0;right:0;height:6px;}
+  .tile.c .stripe{background:var(--cyan);}
+  .tile.m .stripe{background:var(--magenta);}
+  .tile.y .stripe{background:var(--yellow);}
+  .tile.k .stripe{background:var(--key);}
+  .tile .plate-no{display:block;margin-bottom:10px;}
+  .tile h3{font-family:var(--font-display);font-size:1.25rem;text-transform:uppercase;margin:0 0 8px;letter-spacing:0.01em;}
+  .tile .go{font-family:var(--font-mono);font-size:0.75rem;color:var(--ink-soft);}
+  .tile:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);}
+  .tile:hover .go{color:var(--ink);}
+
+  /* ---------- work grids ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:52px 32px;}
+  .plate-card{background:#fff;border:1px solid var(--ink-faint);padding:18px;}
+  .frame{background:var(--paper-dim);}
+  iframe.pdf{width:100%;height:480px;border:none;display:block;}
+  .video-wrap{position:relative;padding-top:56.25%;height:0;overflow:hidden;}
+  .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+  .caption{margin-top:14px;font-family:var(--font-mono);}
+  .caption .proj{font-weight:700;text-transform:uppercase;font-size:0.85rem;letter-spacing:0.02em;}
+  .caption .meta{font-size:0.75rem;color:var(--ink-soft);margin-top:3px;}
+  .fallback{display:inline-block;margin-top:10px;font-family:var(--font-mono);font-size:0.72rem;text-decoration:underline;}
+
+  /* ---------- photography masonry ---------- */
+  .photo-grid{
+    column-width:260px;
+    column-count:4;
+    column-gap:24px;
+  }
+  .photo-card{
+    display:inline-block;
+    width:100%;
+    break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+    page-break-inside:avoid;
+    margin:0 0 24px;
+    background:#fff;
+    border:1px solid var(--ink-faint);
+    padding:16px;
+  }
+  .photo-card img{width:100%;height:auto;display:block;}
+
+  footer.page-end{
+    margin-top:80px;
+    padding-top:24px;
+    border-top:1px dashed var(--ink-faint);
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .tile:hover{transform:none;box-shadow:none;}
+  }
+
+  /* ---------- mobile ---------- */
+  @media (max-width:860px){
+    .sidebar{
+      position:fixed;
+      top:0;left:0;right:0;bottom:auto;
+      width:auto;
+      height:64px;
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+      border-right:none;
+      border-bottom:2px solid var(--ink);
+      padding:0 18px;
+    }
+    .brand{margin:0;font-size:1.2rem;}
+    .sidebar-controls{margin-bottom:0;display:flex;align-items:center;gap:10px;}
+    .nav-list{
+      position:fixed;
+      top:64px;left:0;right:0;
+      flex-direction:column;
+      background:var(--paper);
+      border-bottom:2px solid var(--ink);
+      transform:translateY(-120%);
+      transition:transform 0.25s ease;
+      padding:10px 18px 18px;
+      max-height:70vh;
+      overflow-y:auto;
+    }
+    .sidebar.open .nav-list{transform:translateY(0);}
+    .sidebar-footer{display:none;}
+    .mobile-nav-toggle{display:block;}
+    main{margin-left:0;margin-top:64px;padding:40px 22px 80px;}
+    .reg-mark{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<span class="reg-mark reg-tl" aria-hidden="true"></span>
+<span class="reg-mark reg-tr" aria-hidden="true"></span>
+<span class="reg-mark reg-bl" aria-hidden="true"></span>
+<span class="reg-mark reg-br" aria-hidden="true"></span>
+
+<nav class="sidebar" aria-label="Portfolio sections">
+  <div class="brand"><span>SYAHREEL</span><span>REZA</span></div>
+
+  <div class="sidebar-controls">
+    <div class="lang-toggle" role="group" aria-label="Language / Bahasa">
+      <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-btn" data-lang="ms" aria-pressed="false">BM</button>
+    </div>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-en="Menu" data-ms="Menu">Menu</button>
+  </div>
+
+  <ul class="nav-list" role="tablist" aria-orientation="vertical">
+    <li role="presentation">
+      <button class="nav-item active" role="tab" id="tab-home" aria-controls="home" aria-selected="true" data-target="home">
+        <span class="ink-dot ink-none" aria-hidden="true"></span><span data-en="Home" data-ms="Laman Utama">Home</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-brand-poster" aria-controls="brand-poster" aria-selected="false" data-target="brand-poster">
+        <span class="ink-dot ink-c" aria-hidden="true"></span><span data-en="Branding & Poster" data-ms="Penjenamaan & Poster">Branding &amp; Poster</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-video-anim" aria-controls="video-anim" aria-selected="false" data-target="video-anim">
+        <span class="ink-dot ink-m" aria-hidden="true"></span><span data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-apps-web" aria-controls="apps-web" aria-selected="false" data-target="apps-web">
+        <span class="ink-dot ink-y" aria-hidden="true"></span><span data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="nav-item" role="tab" id="tab-photography" aria-controls="photography" aria-selected="false" data-target="photography">
+        <span class="ink-dot ink-k" aria-hidden="true"></span><span data-en="Photography" data-ms="Fotografi">Photography</span>
+      </button>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    EMAIL: syahreelr@gmail.com<br>
+    LINKEDIN: <a href="https://www.linkedin.com/in/syahreelreza" target="_blank">@syahreelreza</a><br>
+    STATUS: <span data-en="SEEKING INTERNSHIP OPPORTUNITIES" data-ms="MENCARI PELUANG LATIHAN INDUSTRI">SEEKING INTERNSHIP OPPORTUNITIES</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="panel" role="tabpanel" aria-labelledby="tab-home" tabindex="-1">
+    <div class="hero">
+      <div class="eyebrow">Portfolio 2024 - 2026</div>
+      <h1>Syahreel Reza</h1>
+      <p class="role" data-en="A Multimedia student passionate about video production and visual storytelling, with experience in graphic design, animation, app and web design, and photography." data-ms="Pelajar Multimedia yang meminati penghasilan video dan penyampaian visual, dengan pengalaman dalam reka bentuk grafik, animasi, reka bentuk aplikasi dan web, serta fotografi.">A Multimedia student passionate about video production and visual storytelling, with experience in graphic design, animation, app and web design, and photography.</p>
+    </div>
+
+    <div class="home-grid">
+      <div class="ticket">
+        <div class="ticket-title" data-en="Job Ticket" data-ms="Tiket Kerja">Job Ticket</div>
+        <div class="ticket-row"><span class="label" data-en="Discipline" data-ms="Bidang">Discipline</span><span class="value" data-en="Video · Graphic · Motion · Photo" data-ms="Video · Grafik · Animasi · Foto">Video · Graphic · Motion · Photo</span></div>
+        <div class="ticket-row"><span class="label" data-en="Based in" data-ms="Berpangkalan di">Based in</span><span class="value">Ipoh, Perak</span></div>
+        <div class="ticket-row"><span class="label" data-en="Tools" data-ms="Alat">Tools</span><span class="value">Adobe Creative, Davinci Resolve, Blender</span></div>
+        <div class="ticket-row"><span class="label" data-en="Available for" data-ms="Tersedia untuk">Available for</span><span class="value" data-en="Internship" data-ms="Latihan Industri">Internship</span></div>
+        <div class="ticket-row"><span class="label" data-en="Inks" data-ms="Dakwat">Inks</span>
+          <span class="value inks-row">
+            <span class="ink-dot ink-c" aria-hidden="true"></span>
+            <span class="ink-dot ink-m" aria-hidden="true"></span>
+            <span class="ink-dot ink-y" aria-hidden="true"></span>
+            <span class="ink-dot ink-k" aria-hidden="true"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="tiles">
+        <button class="tile c" data-target="brand-poster">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 01" data-ms="Plat 01">Plate 01</span>
+          <h3 data-en="Branding & Poster" data-ms="Penjenaman & Poster">Branding &amp; Poster</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+        <button class="tile m" data-target="video-anim">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 02" data-ms="Plat 02">Plate 02</span>
+          <h3 data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+        <button class="tile y" data-target="apps-web">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 03" data-ms="Plat 03">Plate 03</span>
+          <h3 data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+        <button class="tile k" data-target="photography">
+          <span class="stripe" aria-hidden="true"></span>
+          <span class="plate-no" data-en="Plate 04" data-ms="Plat 04">Plate 04</span>
+          <h3 data-en="Photography" data-ms="Fotografi">Photography</h3>
+          <span class="go" data-en="View plates →" data-ms="Lihat plat →">View plates →</span>
+        </button>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios 202603223375 (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+  </section>
+
+  <!-- ============ BRANDING & POSTER (PDF embeds) ============ -->
+  <section id="brand-poster" class="panel" role="tabpanel" aria-labelledby="tab-brand-poster" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 01 / Ink: Cyan" data-ms="Plat 01 / Dakwat: Sian">Plate 01 / Ink: Cyan</span>
+      <h2 data-en="Branding & Poster" data-ms="Penjenamaan & Poster">Branding &amp; Poster</h2>
+      <div class="bar c"></div>
+      <p class="section-intro" data-en="Creating visual identities, promotional materials, and engaging, impactful poster designs." data-ms="Menghasilkan identiti visual, bahan promosi dan reka bentuk poster yang menarik serta berkesan.">Creating visual identities, promotional materials, and engaging, impactful poster designs.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-seagames.pdf" title="Branding project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="SEA Games Logo Competition" data-ms="Pertandingan Logo Sukan SEA">SEA Games Logo Competition</div>
+          <div class="meta" data-en="Ministry of Youth and Sports" data-ms="Kementerian Belia dan Sukan">Ministry of Youth and Sports</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-seagames.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-kmdim.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Corporate Social Responsibility" data-ms="Khidmat Masyarakat">Corporate Social Responsibility</div>
+          <div class="meta" data-en="Taman Chepor Idaman Community" data-ms="Komuniti Taman Chepor Idaman">Taman Chepor Idaman Community</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-kmdim.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-capyzza.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Capyzza Brand Identity" data-ms="Identiti Jenama Capyzza">Capyzza Brand Identity</div>
+          <div class="meta" data-en="CDA2013 - Design and Visual Communication" data-ms="CDA2013 - Design and Visual Communication">CDA2013 - Design and Visual Communication</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-capyzza.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-msme.pdf" title="Branding project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="MSME Johor Rebrand Competition" data-ms="Pertandingan Penjenamaan Semula MSME Johor">MSME Johor Rebrand Competition</div>
+          <div class="meta" data-en=" MSME Association of Johor" data-ms="Persatuan PMKS Johor">MSME Association of Johor</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-msme.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-bayangkencana.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Bayang Kencana Brand Identity" data-ms="Identiti Jenama Bayang Kencana">Bayang Kencana Brand Identity</div>
+          <div class="meta" data-en="CPM2034 - Multimedia Project Management" data-ms="CPM2034 - Multimedia Project Management">CPM2034 - Multimedia Project Management</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-bayangkencana.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-hydr8.pdf" title="Poster project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="HYDR8 Brand Identity" data-ms="Identiti Jenama HYDR8">HYDR8 Brand Identity</div>
+          <div class="meta" data-en="HCP1013 - Fundemental of Copywriting" data-ms="HCP1013 - Fundemental of Copywriting">HCP1013 - Fundemental of Copywriting</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-hydr8.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-kinetique.pdf" title="Poster project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Kinetique Studios Brand Identity" data-ms="Identiti Jenama Kinetique Studios">Kinetique Studios Brand Identity</div>
+          <div class="meta" data-en="CAV1203 - Motion Graphic" data-ms="CAV1203 - Motion Graphic">CAV1203 - Motion Graphic</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-kinetique.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/poster-toystory.pdf" title="Poster project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Toy Story Poster Recreation" data-ms="Pembuatan Semula Poster Toy Story">Toy Story Poster Recreation</div>
+          <div class="meta" data-en="CDA1123 - Digital Image Editing" data-ms="CDA1123 - Digital Image Editing">CDA1123 - Digital Image Editing</div>
+        </div>
+        <a class="fallback" href="pdfs/poster-toystory.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+      
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-orecheez.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Orecheez Brand Identity" data-ms="Identiti Jenama Orecheez">Orecheez Brand Identity</div>
+          <div class="meta" data-en="PEN2383 - Digital Entrepreneurship" data-ms="PEN2383 - Digital Entrepreneurship">PEN2383 - Digital Entrepreneurship</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-orecheez.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-anrcraft.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="ANR Craft Brand Identity" data-ms="Identiti Jenama ANR Craft">ANR Craft Brand Identity</div>
+          <div class="meta" data-en="ANR Craft" data-ms="ANR Craft">ANR Craft</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-anrcraft.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-unimc.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="UniMC Rebrand" data-ms="Penjenamaan Semula UniMC">UniMC Rebrand</div>
+          <div class="meta" data-en="UniMC" data-ms="UniMC">UniMC</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-unimc.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-tessera.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Tessera Brand Identity" data-ms="Identiti Jenama Tessera">Tessera Brand Identity</div>
+          <div class="meta" data-en="HCE2013 - Effective Communication Strategies" data-ms="HCE2013 - Effective Communication Strategies">HCE2013 - Effective Communication Strategies</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-tessera.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-miskinah.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Family Day 2026 Logo" data-ms="Logo Hari Keluarga 2026">Family Day 2026 Logo</div>
+          <div class="meta" data-en="Miskinah Generation" data-ms="Miskinah Generation">Miskinah Generation</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-miskinah.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-mahhir.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="MAHHIR FILM Brand Identity" data-ms="Identiti Jenama MAHHIR FILM">MAHHIR FILM Brand Identity</div>
+          <div class="meta" data-en="CAV2233 - Media Production" data-ms="CAV2233 - Media Production">CAV2233 - Media Production</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-mahhir.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-memora.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Memora Brand Identity" data-ms="Identiti Jenama Memora">Memora Brand Identity</div>
+          <div class="meta" data-en="CIM1043 - Human Computer Interaction" data-ms="CIM1043 - Human Computer Interaction">CIM1043 - Human Computer Interaction</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-memora.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/reyz-dapurbatik.pdf" title="Poster project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="DAPUR BATIK Brand Identity" data-ms="Identiti Jenama DAPUR BATIK">DAPUR BATIK Brand Identity</div>
+          <div class="meta" data-en="Dapur Batik" data-ms="Dapur Batik">Dapur Batik</div>
+        </div>
+        <a class="fallback" href="pdfs/reyz-dapurbatik.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios 202603223375 (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ VIDEO & ANIMATION (YouTube embeds) ============ -->
+  <section id="video-anim" class="panel" role="tabpanel" aria-labelledby="tab-video-anim" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 02 / Ink: Magenta" data-ms="Plat 02 / Dakwat: Magenta">Plate 02 / Ink: Magenta</span>
+      <h2 data-en="Video & Animation" data-ms="Video & Animasi">Video &amp; Animation</h2>
+      <div class="bar m"></div>
+      <p class="section-intro" data-en="Creating videos, animations, and visual storytelling through a creative approach." data-ms="Menghasilkan video, animasi dan penyampaian visual dengan pendekatan yang kreatif.">Creating videos, animations, and visual storytelling through a creative approach.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/hijfJRkvHKI" title="Garis Panduan untuk Mengelakkan Buli Siber" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Guidelines for Preventing Cyberbullying" data-ms="Garis Panduan untuk Mengelakkan Buli Siber">Guidelines for Preventing Cyberbullying</div>
+          <div class="meta" data-en="Director, Screenwriter, Camera Operator, Cast, Editor, Graphic Designer" data-ms="Pengarah, Penulis Skrip, Jurukamera, Pelakon, Penyunting, Pereka Grafik">Director, Screenwriter, Camera Operator, Cast, Editor, Graphic Designer</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/NOZ4xJ4D6Wc" title="Exploring The Star Playground" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Exploring The Star Playground" data-ms="Menjelajah The Star Playground">Exploring The Star Playground</div>
+          <div class="meta" data-en="Vlogger, Camera Operator, Editor, Voice Over" data-ms="Vlogger, Jurukamera, Penyunting, Pengisi Suara">Vlogger, Camera Operator, Editor, Voice Over</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/qIQgc1qHJCo" title="Hasil Rasuah Adalah Haram" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Bribery Proceeds Are Forbidden" data-ms="Hasil Rasuah Adalah Haram">Bribery Proceeds Are Forbidden</div>
+          <div class="meta" data-en="Assistant Director, Camera Operator, Editor" data-ms="Penolong Pengarah, Jurukamera, Penyunting">Assistant Director, Camera Operator, Editor</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/YGat-Dc73mQ" title="Kegunaan Air Hujan" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Uses of Rainwater" data-ms="Kegunaan Air Hujan">Uses of Rainwater</div>
+          <div class="meta" data-en="Director, Screenwriter, 3D Modeler, Texture Artist, Rigger, Animator, Renderer, Editor" data-ms="Pengarah, Penulis Skrip, Pemodel 3D, Artis Tekstur, Artis Rig, Juruanimasi, Pelukis Render, Penyunting">Director, Screenwriter, 3D Modeler, Texture Artist, Rigger, Animator, Renderer, Editor</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/auJIaGA-go0" title="WAU: Harmony in the Sky" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="WAU: Harmony in the Sky" data-ms="WAU: Keharmonian di Langit">WAU: Harmony in the Sky</div>
+          <div class="meta" data-en="Director, Screenwriter, 2D Animator, Voice Actor, Editor" data-ms="Pengarah, Penulis Skrip, Juruanimasi 2D, Pengisi Suara, Penyunting">Director, Screenwriter, 2D Animator, Voice Actor, Editor</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/lkRiKHcdXWU" title="Animation Dubbing Exercise" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Animation Dubbing Exercise" data-ms="Latihan Alih Suara Animasi">Animation Dubbing Exercise</div>
+          <div class="meta" data-en="Dubbing Artist, Editor" data-ms="Pengalih Suara, Penyunting">Dubbing Artist, Editor</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/henPiYN9Lrg" title="Shot Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Shot Introduction" data-ms="Pengenalan Syot">Shot Introduction</div>
+          <div class="meta" data-en="Director, Camera Operator, Editor" data-ms="Pengarah, Jurukamera, Penyunting">Director, Camera Operator, Editor</div>
+        </div>
+      </div>
+
+        <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/3ZwicxS5Bvo" title="Corntoz Advertisement" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Corntoz Advertisement" data-ms="Iklan Corntoz">Corntoz Advertisement</div>
+          <div class="meta" data-en="Graphic Designer, Voice Actor, Editor" data-ms="Pereka Grafik, Pengisi Suara, Penyunting">Graphic Designer, Voice Actor, Editor</div>
+        </div>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/DY9nIbxtS3I" title="Snapbag Advertisement" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Snapbag Advertisement" data-ms="Iklan Snapbag">Snapbag Advertisement</div>
+          <div class="meta" data-en="Camera Operator, Cast" data-ms="Jurukamera, Pelakon">Camera Operator, Cast</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios 202603223375 (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ APPS & WEBSITE (PDF embeds) ============ -->
+  <section id="apps-web" class="panel" role="tabpanel" aria-labelledby="tab-apps-web" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 03 / Ink: Yellow" data-ms="Plat 03 / Dakwat: Kuning">Plate 03 / Ink: Yellow</span>
+      <h2 data-en="Apps & Website" data-ms="Aplikasi & Laman Web">Apps &amp; Website</h2>
+      <div class="bar y"></div>
+      <p class="section-intro" data-en="Designing applications and websites with a focus on user experience (UX) and intuitive user interface (UI) design." data-ms="Mereka bentuk aplikasi dan laman web dengan memberi fokus kepada pengalaman pengguna (UX) serta reka bentuk antara muka pengguna (UI) yang intuitif.">Designing applications and websites with a focus on user experience (UX) and intuitive user interface (UI) design.</p>
+    </div>
+
+    <div class="work-grid">
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/app-memora.pdf" title="App or website project 1 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Memora App Design" data-ms="Reka Bentuk Aplikasi Memora">Memora App Design</div>
+          <div class="meta" data-en="Memora is a learning app featuring flashcards and quizzes for various subjects." data-ms="Memora ialah aplikasi pembelajaran dengan kad imbas dan kuiz untuk pelbagai subjek.">Memora is a learning app featuring flashcards and quizzes for various subjects.</div>
+        </div>
+        <a class="fallback" href="pdfs/app-memora.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/web-gerabak18.pdf" title="App or website project 2 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Gerabak 18 Website" data-ms="Laman Web Gerabak 18">Gerabak 18 Website</div>
+          <div class="meta" data-en="Gerabak 18 is a website featuring information, gallery, menu, location, and contact details." data-ms="Gerabak 18 ialah laman web yang memaparkan maklumat, galeri, menu, lokasi serta maklumat perhubungan.">Gerabak 18 is a website featuring information, gallery, menu, location, and contact details.</div>
+        </div>
+        <a class="fallback" href="pdfs/web-gerabak18.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+
+      <div class="plate-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+          <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+          <iframe class="pdf" src="pdfs/web-minitour.pdf" title="App or website project 3 PDF"></iframe>
+        </div>
+        <div class="caption">
+          <div class="proj" data-en="Malaysia Mini Tour Website" data-ms="Laman Web Malaysia Mini Tour">Malaysia Mini Tour Website</div>
+          <div class="meta" data-en="Malaysia Mini Tour is an interactive website exploring Malaysian states through fun facts, traditional clothing, and local food." data-ms="Malaysia Mini Tour ialah laman web interaktif yang meneroka negeri-negeri Malaysia melalui fakta menarik, pakaian tradisional dan makanan tempatan.">Malaysia Mini Tour is an interactive website exploring Malaysian states through fun facts, traditional clothing, and local food.</div>
+        </div>
+        <a class="fallback" href="pdfs/web-minitour.pdf" target="_blank" rel="noopener" data-en="Open PDF ↗" data-ms="Buka PDF ↗">Open PDF ↗</a>
+      </div>
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios 202603223375 (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+
+  </section>
+
+  <!-- ============ PHOTOGRAPHY (JPG masonry grid) ============ -->
+  <section id="photography" class="panel" role="tabpanel" aria-labelledby="tab-photography" tabindex="-1" hidden>
+    <div class="section-header">
+      <span class="plate-no" data-en="Plate 04 / Ink: Key (Black)" data-ms="Plat 04 / Dakwat: Hitam">Plate 04 / Ink: Key (Black)</span>
+      <h2 data-en="Photography" data-ms="Fotografi">Photography</h2>
+      <div class="bar k"></div>
+      <p class="section-intro" data-en="Capturing and creating photographic works with attention to composition, creativity, and visual storytelling." data-ms="Merakam dan menghasilkan karya fotografi dengan menekankan komposisi, kreativiti dan penyampaian visual.">Capturing and creating photographic works with attention to composition, creativity, and visual storytelling.</p>
+    </div>
+
+    <div class="photo-grid">
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="DR. Seenivasagam Recreational Park" data-ms="Taman Rekreasi DR. Seenivasagam">DR. Seenivasagam Recreational Park</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_3.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Taman Eko Rimba Kledang Saiong" data-ms="Taman Eko Rimba Kledang Saiong">Taman Eko Rimba Kledang Saiong</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_4.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Bukit Bangkong" data-ms="Bukit Bangkong">Bukit Bangkong</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Landscape_6.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Bukit Bangkong" data-ms="Bukit Bangkong">Bukit Bangkong</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Street_6.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Perak Cave Temple" data-ms="Tokong Gua Perak">Perak Cave Temple</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Street_8.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Ipoh Flea Market" data-ms="Pasar Karat Ipoh">Ipoh Flea Market</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Cultural_1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Perak Cave Temple" data-ms="Tokong Gua Perak">Perak Cave Temple</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Cultural_8.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Bukit Bangkong" data-ms="Bukit Bangkong">Bukit Bangkong</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/Hero_Prop_Shot.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Pencil Case Photoshoot" data-ms="Sesi Fotografi Bekas Pensel">Pencil Case Photoshoot</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/kupon.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Kupon Yaya 2016" data-ms="Kupon Yaya 2016">Kupon Yaya 2016</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/puyuh.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Injured Quail" data-ms="Kepala Puyuh Tercedera">Injured Quail</div><div class="meta" data-en="realme GT Neo 3" data-ms="realme GT Neo 3">realme GT Neo 3</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/batik.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Family Day 2026" data-ms="Hari Keluarga 2026">Family Day 2026</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/anggun.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Family Day 2026" data-ms="Hari Keluarga 2026">Family Day 2026</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/pingpong.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Family Day 2026" data-ms="Hari Keluarga 2026">Family Day 2026</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/selipar.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Family Day 2026" data-ms="Hari Keluarga 2026">Family Day 2026</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/laki.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Family Day 2026" data-ms="Hari Keluarga 2026">Family Day 2026</div><div class="meta" data-en="Canon EOS R50" data-ms="Canon EOS R50">Canon EOS R50</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/undi.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="2026 Johor State Election" data-ms="Pilihan Raya Negeri Johor 2026">2026 Johor State Election</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/tangkak.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Signage in Tangkak" data-ms="Papan Tanda di Tangkak">Signage in Tangkak</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+
+      <div class="photo-card">
+        <div class="plate frame">
+          <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
+        <img src="photos/lostworld.jpg" alt="" loading="lazy">
+        </div>
+        <div class="caption"><div class="proj" data-en="Lost World of Tambun" data-ms="Lost World of Tambun">Lost World of Tambun</div><div class="meta" data-en="iPhone 17" data-ms="iPhone 17">iPhone 17</div></div>
+      </div>
+      
+    </div>
+
+    <footer class="page-end">© 2026 REYZ Studios 202603223375 (003882314-P). All rights reserved.<br>
+    Certain content remains the copyright of their respective owners. Used for educational purposes only.</footer>
+  </section>
+
+</main>
+
+<script>
+  (function(){
+    var panels = document.querySelectorAll('.panel');
+    var navButtons = document.querySelectorAll('.nav-item');
+    var jumpButtons = document.querySelectorAll('[data-target]');
+    var sidebar = document.querySelector('.sidebar');
+    var mobileToggle = document.querySelector('.mobile-nav-toggle');
+    var validTargets = ['home','brand-poster','video-anim','apps-web','photography'];
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function switchPanel(target){
+      if(validTargets.indexOf(target) === -1) target = 'home';
+
+      panels.forEach(function(p){ p.hidden = (p.id !== target); });
+
+      navButtons.forEach(function(btn){
+        var isActive = btn.dataset.target === target;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      sidebar.classList.remove('open');
+      if(mobileToggle) mobileToggle.setAttribute('aria-expanded','false');
+
+      var panel = document.getElementById(target);
+      if(panel){ panel.focus({preventScroll:true}); }
+
+      window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+      history.replaceState(null, '', '#' + target);
+    }
+
+    jumpButtons.forEach(function(el){
+      el.addEventListener('click', function(){ switchPanel(el.dataset.target); });
+    });
+
+    if(mobileToggle){
+      mobileToggle.addEventListener('click', function(){
+        var isOpen = sidebar.classList.toggle('open');
+        mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    var initial = location.hash.replace('#','');
+    switchPanel(validTargets.indexOf(initial) !== -1 ? initial : 'home');
+
+    /* ---------- language toggle (EN / BM) ---------- */
+    var langButtons = document.querySelectorAll('.lang-btn');
+    var i18nEls = document.querySelectorAll('[data-en]');
+
+    function setLanguage(lang){
+      document.documentElement.lang = lang;
+      i18nEls.forEach(function(el){
+        var text = el.getAttribute('data-' + lang);
+        if(text === null){ text = el.getAttribute('data-en'); }
+        el.textContent = text;
+      });
+      langButtons.forEach(function(btn){
+        var isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
+
+    langButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){ setLanguage(btn.dataset.lang); });
+    });
+  })();
+</script>
+
+</body>
+</html>
