@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="/kitarungkai/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/kitarungkai/favicon-32.png">
+<link rel="apple-touch-icon" href="/kitarungkai/apple-touch-icon.png">
+<meta name="theme-color" content="#ff520d">
+<meta property="og:title" content="Kita Rungkai">
+<meta property="og:description" content="Merungkai benda menarik di dunia!">
+<meta property="og:image" content="https://reyz.com.my/kitarungkai/icon-512.png">
+<meta property="og:url" content="https://reyz.com.my/kitarungkai/">
+<title>Kita Rungkai</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Kita Rungkai — Merungkai benda menarik di dunia!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=Baloo+2:wght@700;800&family=Nunito:wght@700;800&display=swap">
+<style>
+/* Layout: a cartoon wooden room with the Kita Rungkai cast. Phone = scene on top, links below. Desktop = scene left, links right. */
+:root{
+  --wood:#c28a55; --wood-line:#a8703f; --wall:#d6a26b; --wall-line:#bf8a52;
+  --floor:#8a5a33; --ink:#241726; --paper:#ffffff; --face:#ffffff; --face-sh:#eef0f6;
+  --sky:#9fd8f0; --sun:#ffd04a; --shutter:#7fb38a; --palm:#4f8a5b;
+  --key:#ff520d; --peach:#ffb098; --title:#ffffff;
+  --brand:"Archivo","Arial Black",system-ui,sans-serif;
+  --display:"Baloo 2","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --text:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --wood:#4a3222; --wood-line:#3a261a; --wall:#5a3d29; --wall-line:#4a3121;
+  --floor:#2f1f15; --ink:#1a1019; --paper:#fbf6ee; --face:#ffffff; --face-sh:#e6e8f0;
+  --sky:#1f2d55; --sun:#f3ecc8; --shutter:#4f7a5b; --palm:#24432f; --title:#fff7e6;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --wood:#4a3222; --wood-line:#3a261a; --wall:#5a3d29; --wall-line:#4a3121;
+  --floor:#2f1f15; --ink:#1a1019; --paper:#fbf6ee; --face:#ffffff; --face-sh:#e6e8f0;
+  --sky:#1f2d55; --sun:#f3ecc8; --shutter:#4f7a5b; --palm:#24432f; --title:#fff7e6;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{
+  margin:0; color:var(--ink); font-family:var(--text);
+  background:var(--wood);
+  background-image:repeating-linear-gradient(90deg,var(--wood) 0 62px,var(--wood-line) 62px 65px);
+}
+.page{
+  max-width:1060px; margin:0 auto;
+  padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:grid; grid-template-columns:minmax(0,1fr); gap:24px; align-items:start;
+}
+@media (min-width:880px){
+  .page{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; padding-block:56px; align-items:center; min-height:100%}
+  .scene-wrap{position:sticky; top:40px}
+}
+.col{display:flex; flex-direction:column; gap:20px; min-width:0; max-width:520px; width:100%; margin:0 auto}
+
+/* Scene */
+.scene{
+  width:100%; max-width:100%; display:block;
+  border:4px solid var(--ink); border-radius:28px; overflow:hidden;
+  background:var(--wall);
+  background-image:repeating-linear-gradient(90deg,var(--wall) 0 46px,var(--wall-line) 46px 49px);
+  box-shadow:0 8px 0 var(--ink);
+}
+.scene .o{stroke:var(--ink); stroke-width:3; stroke-linecap:round; stroke-linejoin:round}
+.scene .ln{fill:none; stroke-linecap:round; stroke-linejoin:round}
+.f-ink{fill:var(--ink)} .f-face{fill:var(--face)} .f-sky{fill:var(--sky)} .f-sun{fill:var(--sun)}
+.f-shutter{fill:var(--shutter)} .f-palm{fill:var(--palm)} .f-floor{fill:var(--floor)}
+.f-paper{fill:var(--paper)} .f-key{fill:var(--key)} .f-peach{fill:var(--peach)}
+.s-ink{stroke:var(--ink)}
+.bubble-text{font-family:var(--display); font-weight:800; font-size:15px; fill:var(--ink)}
+.yarn{transform-box:fill-box; transform-origin:center; animation:roll 6s linear infinite}
+@keyframes roll{to{transform:rotate(360deg)}}
+.bubble{transform-box:fill-box; transform-origin:20% 100%; animation:pop .6s cubic-bezier(.3,1.6,.5,1) .2s both}
+@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+.bob{animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.anim{transform-box:fill-box; transform-origin:50% 100%}
+.tug{animation:tug .45s ease-out}
+@keyframes tug{40%{transform:translateX(-6px) rotate(-6deg)}}
+.jump{animation:jump .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes jump{40%{transform:translateY(-18px)}}
+.hit{cursor:pointer; outline:none}
+.hit:focus-visible .ring{stroke:var(--paper); stroke-width:4}
+.hint{animation:hint 1.2s ease-in-out infinite}
+@keyframes hint{50%{transform:translateY(-4px)}}
+.ring{fill:none; stroke:var(--key); stroke-width:3; stroke-dasharray:6 5; animation:spin 8s linear infinite; transform-box:fill-box; transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hint-text{font-family:var(--display); font-weight:800; font-size:13px; fill:var(--ink)}
+.loose{fill:none; stroke:var(--key); stroke-width:3; stroke-linecap:round; transition:stroke-dashoffset .5s ease}
+
+/* Fact card under the scene */
+.scene-wrap{display:flex; flex-direction:column; gap:14px}
+.fact{
+  background:var(--paper); border:3px solid var(--ink); border-radius:20px; box-shadow:0 5px 0 var(--ink);
+  padding:14px 16px; display:flex; flex-direction:column; gap:10px; color:var(--ink);
+}
+.fact-top{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.fact-label{font-family:var(--display); font-weight:800; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase}
+.dots{display:flex; gap:5px}
+.dots i{width:11px; height:11px; border-radius:50%; border:2px solid var(--ink); background:transparent; transition:background-color .2s}
+.dots i.on{background:var(--key)}
+.fact p{margin:0; font-weight:800; font-size:1.05rem; line-height:1.4; min-height:2.8em; text-wrap:pretty}
+.fact p em{font-style:normal; color:var(--key)}
+.fact p a{color:var(--key)}
+.btns{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  font:800 1.05rem/1 var(--display); color:#fff; background:var(--key); cursor:pointer;
+  border:3px solid var(--ink); border-radius:999px; padding:10px 20px 8px; box-shadow:0 4px 0 var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--ink)}
+.btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--ink)}
+.btn:focus-visible{outline:4px solid var(--paper); outline-offset:2px}
+.btn.alt{background:var(--paper); color:var(--ink)}
+
+/* Header */
+.head{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center}
+.avatar{
+  width:96px; height:96px; border-radius:26px; background:var(--peach);
+  border:4px solid var(--ink); box-shadow:0 5px 0 var(--ink); display:grid; place-items:center;
+  transform:rotate(-4deg);
+}
+.key{width:40px; height:72px; overflow:visible; transform-origin:50% 10%; animation:jiggle 5s ease-in-out infinite}
+.key path,.key circle{fill:var(--key); stroke:var(--ink); stroke-width:1.6; stroke-linejoin:round; paint-order:stroke}
+@keyframes jiggle{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(9deg)}94%{transform:rotate(-6deg)}}
+h1{
+  margin:0; font-family:var(--brand); font-weight:900; font-stretch:125%; line-height:.95;
+  font-size:clamp(2.3rem,9vw,3.3rem); color:var(--title); letter-spacing:-.5px; text-transform:lowercase;
+  text-shadow:3px 3px 0 var(--ink),-2px -2px 0 var(--ink),2px -2px 0 var(--ink),-2px 2px 0 var(--ink),0 3px 0 var(--ink),3px 0 0 var(--ink);
+  text-wrap:balance;
+}
+.tagline{
+  margin:0; background:var(--paper); color:var(--ink);
+  border:3px solid var(--ink); border-radius:999px; padding:8px 16px;
+  font-weight:800; font-size:1.02rem; box-shadow:0 4px 0 var(--ink);
+}
+.tagline mark{background:var(--key); color:#fff; padding:1px 8px; border-radius:8px; border:2px solid var(--ink)}
+
+/* Links */
+.links{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px}
+.link{
+  display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--ink);
+  background:var(--paper); border:3px solid var(--ink); border-radius:20px;
+  padding:10px 16px 10px 10px; box-shadow:0 5px 0 var(--ink);
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+  animation:rise .5s cubic-bezier(.3,1.4,.5,1) both; animation-delay:calc(var(--i) * 70ms + 150ms);
+}
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+.link:hover,.link:focus-visible{transform:translateY(-3px) rotate(-.6deg); box-shadow:0 8px 0 var(--ink); background:var(--key); color:#fff}
+.link:active{transform:translateY(3px); box-shadow:0 2px 0 var(--ink); background:var(--key); color:#fff}
+.link:focus-visible{outline:4px solid var(--paper); outline-offset:3px}
+.ico{
+  flex:none; width:48px; height:48px; border-radius:14px; border:3px solid var(--ink);
+  display:grid; place-items:center;
+}
+.ico svg{width:28px; height:28px}
+.yt .ico{background:#ff2a2a} .tt .ico{background:#111} .fb .ico{background:#1877f2}
+.ig .ico{background:linear-gradient(45deg,#fdc04a,#f0503c 45%,#c33aa0 75%,#6a4ad6)}
+.th .ico{background:#111} .x .ico{background:#111}
+.lbl{flex:1; min-width:0; font-family:var(--display); font-weight:800; font-size:1.25rem; line-height:1.1}
+.arrow{flex:none; width:26px; height:26px}
+footer{text-align:center; font-weight:800; font-size:.85rem; color:var(--title); text-shadow:1px 1px 0 var(--ink)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important; transition:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<main class="page">
+  <div class="scene-wrap">
+    <svg class="scene" id="scene" viewBox="0 0 360 260" role="group" aria-label="Budak oren Kita Rungkai menarik benang dari bola benang di dalam bilik kayu. Tekan bola benang untuk rungkai fakta.">
+      <!-- window -->
+      <rect class="f-shutter o" x="96" y="34" width="22" height="92" rx="3"/>
+      <rect class="f-shutter o" x="242" y="34" width="22" height="92" rx="3"/>
+      <rect class="f-sky o" x="118" y="30" width="124" height="100" rx="4"/>
+      <circle class="f-sun" cx="214" cy="56" r="13"/>
+      <path class="f-palm" d="M140 130 q4-40 2-58 q-14 2-22 12 q10-14 22-16 q-6-10-18-10 q14-4 20 6 q4-12 16-14 q-10 8-12 18 q12-2 20 8 q-12-4-18-2 q4 20 0 56z"/>
+      <path class="f-palm" d="M200 130 q2-26 0-36 q-10 2-16 8 q6-10 16-12 q-4-8-12-8 q10-2 14 4 q4-8 12-10 q-6 6-8 12 q8 0 14 6 q-8-2-12 0 q2 16 0 36z"/>
+      <line class="o" x1="180" y1="30" x2="180" y2="130"/>
+      <line class="o" x1="118" y1="80" x2="242" y2="80"/>
+      <rect class="f-floor o" x="110" y="128" width="140" height="10" rx="3"/>
+      <!-- framed key logo on the wall -->
+      <rect class="f-peach o" x="24" y="20" width="40" height="46" rx="4"/>
+      <g transform="translate(36.5 26) scale(.52)">
+        <path class="f-key" d="M26.55,8.48c.01.32.14.61.35.82.22.22.52.35.85.35h3.62v7.24h-4.56c-1.48,0-2.68-1.2-2.68-2.68v-3.3c0-.63-.46-1.19-1.09-1.25-.72-.07-1.320.5-1.32,1.2v18.91c-1.17-.24-2.38-.36-3.620-.36s-2.45.13-3.62.36V3.19c0-1.76,1.2-3.19,2.68-3.19h4.56v6.03c0,.33.13.64.35.85.21.21.5.34.82.35.68.02,1.24-.58,1.24-1.26V0h4.56c1.48,0,2.68,1.2,2.68,2.680v4.56h-3.560c-.68,0-1.28.56-1.26,1.240Z"/>
+        <path class="f-key" d="M36.21,47.52c0,10-8.11,18.1-18.1,18.1S0,57.52,0,47.52c0-8.76,6.22-16.06,14.48-17.74v6.6c-4.7,1.52-8.09,5.94-8.09,11.14,0,6.47,5.25,11.72,11.720,11.72s11.72-5.25,11.72-11.72c0-5.21-3.4-9.62-8.09-11.14v-6.6c8.26,1.68,14.48,8.98,14.48,17.74Z"/>
+        <circle class="f-key" cx="18.1" cy="47.52" r="5.32"/>
+      </g>
+      <!-- floor -->
+      <rect class="f-floor" x="0" y="214" width="360" height="46"/>
+      <line class="o" x1="0" y1="214" x2="360" y2="214"/>
+
+      <!-- loose thread piling on the floor as facts are pulled out -->
+      <path id="loose" class="loose" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" d="M246 211 q-8 -5 -16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0"/>
+      <!-- thread from the yarn to his hand -->
+      <path id="thread" class="ln" style="stroke:var(--key); stroke-width:3" d="M162 154 Q212 196 248 186"/>
+
+      <!-- yarn ball (tap to unravel a fact) -->
+      <g id="yarnHit" class="hit" role="button" tabindex="0" aria-label="Rungkai satu fakta">
+        <g id="hint" class="hint">
+          <circle class="ring" cx="262" cy="193" r="28"/>
+          <text class="hint-text" x="262" y="155" text-anchor="middle">Tekan!</text>
+        </g>
+        <g id="yarn" transform="translate(262 193)">
+          <g id="yarnScale">
+            <g class="yarn">
+              <circle r="20" class="f-key o"/>
+              <path class="ln s-ink" stroke-width="2.4" d="M-15 -9 q16 7 32 -2 M-17 3 q18 7 35 -5 M-10 14 q13 2 23 -9 M-5 -19 q-5 16 2 37"/>
+            </g>
+          </g>
+        </g>
+      </g>
+
+      <!-- the orange boy (Kita Rungkai narrator), facing the yarn -->
+      <g transform="translate(120 104)">
+        <g id="boyHit" class="hit" role="button" tabindex="0" aria-label="Kacau budak oren">
+        <g id="boy" class="anim">
+          <!-- legs + shoes -->
+          <path class="ln" stroke="#2e365a" stroke-width="5.5" d="M-8 76 Q-9 92 -10 108 M8 76 Q9 92 10 108"/>
+          <path class="ln s-ink" stroke-width="11" d="M-12 108 H-22 M12 108 H22"/>
+          <path class="ln" stroke="#f4f1ea" stroke-width="7" d="M-12 108 H-22 M12 108 H22"/>
+          <!-- back arm -->
+          <path class="ln" stroke="#8a5029" stroke-width="4.8" d="M-17 40 Q-27 56 -25 70"/>
+          <circle class="f-ink" cx="-25" cy="70" r="4.6"/>
+          <!-- orange tee -->
+          <path class="f-ink" transform="translate(1.8 2.2)" d="M-22 54 C-22 36 -12 30 0 30 C12 30 22 36 22 54 C22 70 14 80 0 80 C-14 80 -22 70 -22 54Z"/>
+          <path fill="#f08a2c" class="o" d="M-22 54 C-22 36 -12 30 0 30 C12 30 22 36 22 54 C22 70 14 80 0 80 C-14 80 -22 70 -22 54Z"/>
+          <path fill="#c96a1c" d="M14 40 C22 50 20 68 6 78 C16 66 17 52 14 40Z" opacity=".55"/>
+          <path class="ln s-ink" stroke-width="2" d="M-8 33 Q0 38 8 33"/>
+          <!-- pulling arm -->
+          <path class="ln" stroke="#8a5029" stroke-width="4.8" d="M17 40 Q30 48 42 50"/>
+          <circle class="f-ink" cx="42" cy="50" r="4.6"/>
+          <!-- head -->
+          <path class="f-ink" transform="translate(2 2.4)" d="M-35 2 C-35 -27 -16 -35 1 -35 C19 -35 36 -26 36 2 C36 23 19 33 0 33 C-19 33 -35 22 -35 2Z"/>
+          <path class="f-face o" d="M-35 2 C-35 -27 -16 -35 1 -35 C19 -35 36 -26 36 2 C36 23 19 33 0 33 C-19 33 -35 22 -35 2Z"/>
+          <path fill="var(--face-sh)" d="M29 -4 C34 10 28 24 12 30 C24 22 29 10 29 -4Z"/>
+          <!-- hair: scalloped dark-brown cap -->
+          <path fill="#2b1d18" class="o" d="M-36 -9 C-36 -31 -16 -37 1 -37 C20 -37 37 -30 37 -9 L30 -6 L23 -10 L16 -6 L9 -10 L2 -6 L-5 -10 L-12 -6 L-19 -10 L-26 -6 Z"/>
+          <path class="ln" stroke="#5a3f33" stroke-width="1.6" d="M12 -31 L5 -19"/>
+          <!-- faces -->
+          <g id="f-smile">
+            <g id="pupils">
+              <ellipse class="f-ink" cx="-4" cy="6" rx="2.7" ry="3.9"><animate attributeName="ry" values="3.9;3.9;.4;3.9" keyTimes="0;.94;.97;1" dur="4.5s" repeatCount="indefinite"/></ellipse>
+              <ellipse class="f-ink" cx="14" cy="6" rx="2.7" ry="3.9"><animate attributeName="ry" values="3.9;3.9;.4;3.9" keyTimes="0;.94;.97;1" dur="4.5s" repeatCount="indefinite"/></ellipse>
+            </g>
+            <path class="f-ink" d="M-9 -2.5 L1 -3.5 L1 -1.5 L-9 -0.5Z M9 -3.5 L19 -2.5 L19 -0.5 L9 -1.5Z"/>
+            <path class="ln s-ink" stroke-width="2.8" d="M2 19 Q8 24 14 18"/>
+          </g>
+          <g id="f-grin" hidden>
+            <path class="ln s-ink" stroke-width="3" d="M-9.5 8 Q-4 1 1.5 8 M8.5 8 Q14 1 19.5 8"/>
+            <path class="f-ink" d="M-9 -5.5 L1 -6.5 L1 -4.5 L-9 -3.5Z M9 -6.5 L19 -5.5 L19 -3.5 L9 -4.5Z"/>
+            <path fill="#5a1e28" class="s-ink" stroke-width="2" stroke-linejoin="round" d="M-2 17 H16 Q16 28 7 28 Q-2 28 -2 17Z"/>
+            <rect x="-1.2" y="17.7" width="16.4" height="3" fill="#fff"/>
+          </g>
+          <g id="f-shock" hidden>
+            <circle cx="-4" cy="6" r="6.5" fill="#fff" class="s-ink" stroke-width="2"/>
+            <circle cx="14" cy="6" r="6.5" fill="#fff" class="s-ink" stroke-width="2"/>
+            <circle class="f-ink" cx="-3" cy="7" r="2.3"/><circle class="f-ink" cx="15" cy="7" r="2.3"/>
+            <path class="ln s-ink" stroke-width="2.8" d="M-10 -5 Q-4 -9 2 -5 M8 -5 Q14 -9 20 -5"/>
+            <ellipse fill="#5a1e28" class="s-ink" stroke-width="2.2" cx="7" cy="22" rx="4.5" ry="5.5"/>
+          </g>
+          <g id="f-laugh" hidden>
+            <path class="ln s-ink" stroke-width="3" d="M-8.5 2 L-1 6 L-8.5 10 M18.5 2 L11 6 L18.5 10"/>
+            <path class="f-ink" d="M-9 -6.5 L1 -7.5 L1 -5.5 L-9 -4.5Z M9 -7.5 L19 -6.5 L19 -4.5 L9 -5.5Z"/>
+            <path fill="#5a1e28" class="s-ink" stroke-width="2" stroke-linejoin="round" d="M-4 15 H18 Q18 31 7 31 Q-4 31 -4 15Z"/>
+            <rect x="-3.2" y="15.7" width="20.4" height="3" fill="#fff"/>
+            <ellipse cx="9" cy="27" rx="5" ry="2.8" fill="#e86e78"/>
+          </g>
+        </g>
+        </g>
+      </g>
+
+      <!-- speech bubble -->
+      <g id="bubble" class="bubble">
+        <path class="f-paper o" d="M178 62 l-14 16 l24 -10"/>
+        <ellipse class="f-paper o" cx="214" cy="46" rx="52" ry="24"/>
+        <path class="f-paper" d="M176 60 l14 4 l-14 8z"/>
+        <text id="say" class="bubble-text" x="214" y="51.5" text-anchor="middle">Jom rungkai!</text>
+      </g>
+    </svg>
+    <div class="fact" aria-live="polite">
+      <div class="fact-top">
+        <span class="fact-label" id="factLabel">Rungkai fakta</span>
+        <span class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <p id="factText">Tekan bola benang (atau butang di bawah) untuk rungkai fakta menarik dari video Kita Rungkai!</p>
+      <div class="btns">
+        <button class="btn" id="pullBtn" type="button">Rungkai!</button>
+        <button class="btn alt" id="resetBtn" type="button" hidden>Main lagi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <header class="head">
+      <div class="avatar" aria-hidden="true">
+        <svg class="key" viewBox="0 0 36.21 65.62">
+          <path d="M26.55,8.48c.01.32.14.61.35.82.22.22.52.35.85.35h3.62v7.24h-4.56c-1.48,0-2.68-1.2-2.68-2.68v-3.3c0-.63-.46-1.190-1.09-1.25-.72-.07-1.32.5-1.32,1.2v18.91c-1.17-.24-2.38-.36-3.62-.36s-2.45.13-3.62.36V3.19c0-1.76,1.2-3.19,2.68-3.19h4.56v6.03c0,.33.13.64.35.85.21.21.5.34.82.35.68.02,1.24-.58,1.24-1.26V0h4.56c1.48,0,2.68,1.2,2.68,2.68v4.56h-3.56c-.68,0-1.28.56-1.26,1.24Z"/>
+          <path d="M36.21,47.52c0,10-8.11,18.1-18.1,18.1S0,57.52,0,47.52c0-8.76,6.22-16.06,14.48-17.74v6.6c-4.7,1.52-8.09,5.94-8.09,11.14,0,6.47,5.25,11.72,11.72,11.72s11.72-5.25,11.72-11.72c0-5.21-3.4-9.62-8.09-11.14v-6.6c8.26,1.680,14.48,8.98,14.48,17.74Z"/>
+          <circle cx="18.1" cy="47.52" r="5.32"/>
+        </svg>
+      </div>
+      <h1>Kita Rungkai</h1>
+      <p class="tagline">Merungkai benda <mark>menarik</mark> di dunia!</p>
+    </header>
+
+    <ul class="links">
+      <li><a class="link yt" style="--i:0" href="https://www.youtube.com/@kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4.5" fill="#fff"/><path d="M10 9 l5.2 3 -5.2 3z" fill="#ff2a2a"/></svg></span>
+        <span class="lbl">YouTube</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+      <li><a class="link tt" style="--i:1" href="https://www.tiktok.com/@kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#25f4ee" transform="translate(-1 -1)"><path d="M13.5 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M13.5 4c.4 2.6 2.4 4.2 5 4.3"/></g>
+          <g stroke="#fe2c55" transform="translate(1 1)"><path d="M13.5 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M13.5 4c.4 2.6 2.4 4.2 5 4.3"/></g>
+          <g stroke="#fff"><path d="M13.5 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M13.5 4c.4 2.6 2.4 4.2 5 4.3"/></g>
+        </svg></span>
+        <span class="lbl">TikTok</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+      <li><a class="link ig" style="--i:2" href="https://www.instagram.com/kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="16.9" cy="7.1" r="1.2" fill="#fff" stroke="none"/></svg></span>
+        <span class="lbl">Instagram</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+      <li><a class="link fb" style="--i:3" href="https://www.facebook.com/kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24"><path fill="#fff" d="M13.6 21v-7.6h2.6l.4-3.1h-3V8.4c0-.9.3-1.5 1.6-1.5h1.6V4.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3.1h2.6V21z"/></svg></span>
+        <span class="lbl">Facebook</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+      <li><a class="link th" style="--i:4" href="https://www.threads.net/@kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24"><text x="12" y="18.5" text-anchor="middle" font-family="Baloo 2, Arial, sans-serif" font-weight="800" font-size="20" fill="#fff">@</text></svg></span>
+        <span class="lbl">Threads</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+      <li><a class="link x" style="--i:5" href="https://x.com/kitarungkai" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" stroke="#fff" stroke-linecap="round"><path d="M5.5 5 18.5 19" stroke-width="3.6"/><path d="M18.5 5 5.5 19" stroke-width="1.8"/></svg></span>
+        <span class="lbl">X</span>
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M6 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a></li>
+    </ul>
+
+    <footer>© 2026 Kita Rungkai · Jom rungkai sama-sama!</footer>
+  </div>
+</main>
+<script>
+(function () {
+  var FACTS = [
+    ["Jarum jam berpusing ke kanan ikut arah ", "bayang jam matahari", " di hemisfera utara."],
+    ["Tumbler yang kemek cepat hilang sejuk sebab ", "ruang vakum", " dalam dindingnya dah terjejas."],
+    ["Pintu tandas awam tak cecah lantai supaya ", "senang dicuci", ", ada pengudaraan dan mudah dibantu bila kecemasan."],
+    ["Kuning telur jadi hijau kelabu bila direbus terlalu lama, sebab ", "sulfur bertemu besi", "."],
+    ["Epal yang dipotong jadi perang sebab enzimnya bertindak balas dengan ", "oksigen", ". Jus lemon boleh lambatkan."],
+    ["Ulat dalam tong sampah sebenarnya ", "larva lalat rumah", " yang menetas dari telur."],
+    ["Suara dalam kepala kita datang dari ", "Area Broca", " di otak, tanpa gerakkan mulut."]
+  ];
+  var SAYS = ["Tahu tak?", "Oooh!", "Betul ke?", "Wah!", "Hah, macam tu!", "Patutlah!", "Fuh!"];
+  var YT = "https://www.youtube.com/@kitarungkai";
+  var $ = function (id) { return document.getElementById(id); };
+  var boy = $("boy"), yarn = $("yarn"), scaleG = $("yarnScale"), thread = $("thread"), loose = $("loose");
+  var say = $("say"), bubble = $("bubble"), text = $("factText"), label = $("factLabel");
+  var dots = $("dots").children, pullBtn = $("pullBtn"), resetBtn = $("resetBtn"), hint = $("hint");
+  var faces = ["smile", "grin", "shock", "laugh"];
+  var n = 0, faceTimer;
+
+  function show(el, on) { if (on) el.removeAttribute("hidden"); else el.setAttribute("hidden", ""); }
+  function face(f) { faces.forEach(function (k) { show($("f-" + k), k === f); }); }
+  function play(el, cls) { el.classList.remove(cls); void el.getBBox(); el.classList.add(cls); }
+  function speak(s) { say.textContent = s; play(bubble, "bubble"); }
+  function layout() {
+    var s = n >= FACTS.length ? 0 : 1 - 0.09 * n, r = 20 * s, cy = 213 - r;
+    yarn.setAttribute("transform", "translate(" + (262 - 6 * n) + " " + cy + ")");
+    scaleG.setAttribute("transform", "scale(" + Math.max(s, 0.001) + ")");
+    var tx = 262 - 6 * n - 0.8 * r, ty = cy - 0.4 * r;
+    thread.setAttribute("d", s ? "M162 154 Q" + ((162 + tx) / 2) + " " + (Math.max(154, ty) + 22) + " " + tx + " " + ty
+                               : "M162 154 Q176 190 190 206");
+    loose.setAttribute("stroke-dashoffset", String(100 - (100 * n) / FACTS.length));
+    for (var i = 0; i < dots.length; i++) dots[i].classList.toggle("on", i < n);
+  }
+  function pull() {
+    if (n >= FACTS.length) return;
+    var f = FACTS[n]; n++;
+    show(hint, false);
+    play(boy, "tug");
+    face(n % 2 ? "shock" : "grin");
+    clearTimeout(faceTimer); faceTimer = setTimeout(function () { face("smile"); }, 1400);
+    layout();
+    label.textContent = "Fakta " + n + " / " + FACTS.length;
+    text.innerHTML = "";
+    text.append(f[0]); var em = document.createElement("em"); em.textContent = f[1]; text.append(em, f[2]);
+    if (n >= FACTS.length) {
+      speak("Siap dirungkai!");
+      clearTimeout(faceTimer); face("laugh");
+      setTimeout(function () {
+        label.textContent = "Semua dah dirungkai!";
+        text.innerHTML = 'Nak lagi? Tonton cerita penuh di <a href="' + YT + '" target="_blank" rel="noopener">YouTube Kita Rungkai</a>.';
+      }, 2600);
+      pullBtn.hidden = true; resetBtn.hidden = false;
+    } else speak(SAYS[(n - 1) % SAYS.length]);
+  }
+  function reset() {
+    n = 0; layout(); face("smile"); show(hint, true);
+    label.textContent = "Rungkai fakta";
+    text.textContent = "Tekan bola benang (atau butang di bawah) untuk rungkai fakta menarik dari video Kita Rungkai!";
+    pullBtn.hidden = false; resetBtn.hidden = true; speak("Jom rungkai!"); pullBtn.focus();
+  }
+  function poke() {
+    play(boy, "jump");
+    var f = ["laugh", "shock", "grin"][Math.floor(Math.random() * 3)];
+    face(f); speak(["Hehe!", "Eh, geli!", "Jom!"][Math.floor(Math.random() * 3)]);
+    clearTimeout(faceTimer); faceTimer = setTimeout(function () { face(n >= FACTS.length ? "laugh" : "smile"); }, 1200);
+  }
+  function keyed(fn) { return function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } }; }
+  $("yarnHit").addEventListener("click", pull); $("yarnHit").addEventListener("keydown", keyed(pull));
+  $("boyHit").addEventListener("click", poke); $("boyHit").addEventListener("keydown", keyed(poke));
+  pullBtn.addEventListener("click", pull); resetBtn.addEventListener("click", reset);
+
+  // his eyes follow the pointer
+  var svg = $("scene"), pupils = $("pupils");
+  svg.addEventListener("pointermove", function (e) {
+    try {
+      var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+      var q = pt.matrixTransform(svg.getScreenCTM().inverse());
+      var dx = q.x - 125, dy = q.y - 110, d = Math.hypot(dx, dy) || 1, k = Math.min(2.6, d / 20);
+      pupils.setAttribute("transform", "translate(" + (dx / d * k) + " " + (dy / d * k) + ")");
+    } catch (err) {}
+  });
+  svg.addEventListener("pointerleave", function () { pupils.removeAttribute("transform"); });
+
+  layout();
+  try { if (matchMedia("(prefers-reduced-motion: reduce)").matches) svg.pauseAnimations(); } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
